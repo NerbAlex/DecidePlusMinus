@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
-import ru.inc.decideplusminus.ui.models.SimpleDecide
-import ru.inc.decideplusminus.ui.view_model.simple.SimpleViewModel
-import ru.inc.decideplusminus.ui.view_model.simple.SimpleViewState
+import ru.inc.decideplusminus.view_model.simple.SimpleViewModel
+import ru.inc.decideplusminus.view_model.simple.SimpleViewState
 
 class SimpleFragment : Fragment() {
 

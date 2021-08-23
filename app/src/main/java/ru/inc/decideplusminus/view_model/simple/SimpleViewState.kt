@@ -1,4 +1,4 @@
-package ru.inc.decideplusminus.ui.view_model.simple
+package ru.inc.decideplusminus.view_model.simple
 
 import ru.inc.decideplusminus.ui.models.SimpleDecide
 
