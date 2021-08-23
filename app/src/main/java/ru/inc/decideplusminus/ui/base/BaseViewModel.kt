@@ -1,5 +1,6 @@
-package ru.inc.decideplusminus.ui.view_model
+package ru.inc.decideplusminus.ui.base
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -8,8 +9,9 @@ import ru.inc.decideplusminus.ui.view_model.simple.ViewState
 abstract class BaseViewModel<S: ViewState>(
     protected val mutableLiveData: MutableLiveData<S> = MutableLiveData(),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
-
     ) : ViewModel() {
+
+    open fun getData(): LiveData<S> = mutableLiveData
 
     override fun onCleared() {
         compositeDisposable.clear()
