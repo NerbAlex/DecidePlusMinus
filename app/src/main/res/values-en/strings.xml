@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DecidePlusMinus</string>
+    <string name="simple_bottom_menu">Simple</string>
+    <string name="complex_bottom_menu">Complex</string>
+    <string name="settings_bottom_menu">Settings</string>
+    <string name="simple_toolbar">Unambiguous solutions</string>
+    <string name="complex_toolbar">Multiple solutions</string>
+    <string name="settings_toolbar">Settings and Premium</string>
+</resources>
