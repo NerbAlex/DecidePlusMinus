@@ -1,0 +1,2 @@
+rootProject.name = "DecidePlusMinus"
+include ':app'
