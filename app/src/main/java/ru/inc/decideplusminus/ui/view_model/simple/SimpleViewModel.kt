@@ -3,13 +3,11 @@ package ru.inc.decideplusminus.ui.view_model.simple
 import ru.inc.decideplusminus.ui.base.BaseViewModel
 import ru.inc.decideplusminus.ui.models.SimpleDecide
 
-class SimpleViewModel : BaseViewModel<ViewState>() {
+class SimpleViewModel : BaseViewModel<SimpleViewState>() {
 
-    val list = listOf<SimpleDecide>()
+    private val list = listOf<SimpleDecide>()
 
-    fun  some() {
-        mutableLiveData.value = ViewState.Success(list)
+    fun start() {
+        mutableLiveData.value = SimpleViewState.Success(list)
     }
-
-
 }

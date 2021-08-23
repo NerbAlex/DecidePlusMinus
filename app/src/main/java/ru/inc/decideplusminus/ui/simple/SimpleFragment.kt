@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
-import ru.inc.decideplusminus.ui.base.Item
+import ru.inc.decideplusminus.ui.models.SimpleDecide
 import ru.inc.decideplusminus.ui.view_model.simple.SimpleViewModel
-import ru.inc.decideplusminus.ui.view_model.simple.ViewState
+import ru.inc.decideplusminus.ui.view_model.simple.SimpleViewState
 
 class SimpleFragment : Fragment() {
 
     private lateinit var viewModel: SimpleViewModel
+    private var adapter: SimpleAdapter? = null
     private var _binding: FragmentSimpleBinding? = null
     private val b get() = _binding!!
 
@@ -24,20 +26,28 @@ class SimpleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(SimpleViewModel::class.java)
+        viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
+        viewModel.start()
     }
 
     private fun initRecyclerView() {
-        viewModel = ViewModelProvider(this).get(SimpleViewModel::class.java)
-        viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
+        adapter = SimpleAdapter()
+        b.recycler.layoutManager = LinearLayoutManager(b.root.context, LinearLayoutManager.VERTICAL, false)
+        b.recycler.setHasFixedSize(true)
+        b.recycler.adapter = adapter
     }
 
-    private fun renderData(state: ViewState) = when (state) {
-        is ViewState.Success<*> -> {
-            val list: List<Item> = state.list
+    private fun renderData(stateSimple: SimpleViewState) = when (stateSimple) {
+        is SimpleViewState.Success -> {
+            adapter?.list = stateSimple.list
         }
-
-        else -> {
-        }
+        SimpleViewState.Error -> TODO()
+        SimpleViewState.Loading -> TODO()
     }
 
     override fun onDestroyView() {

@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import ru.inc.decideplusminus.ui.view_model.simple.ViewState
 
-abstract class BaseViewModel<S: ViewState>(
-    protected val mutableLiveData: MutableLiveData<S> = MutableLiveData(),
+abstract class BaseViewModel<State: Any>(
+    protected val mutableLiveData: MutableLiveData<State> = MutableLiveData(),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
     ) : ViewModel() {
 
-    open fun getData(): LiveData<S> = mutableLiveData
+    open fun getData(): LiveData<State> = mutableLiveData
 
     override fun onCleared() {
         compositeDisposable.clear()
