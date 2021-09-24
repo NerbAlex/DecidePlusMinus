@@ -6,4 +6,6 @@
     <string name="simple_toolbar">Однозначные решения</string>
     <string name="complex_toolbar">Многозначные решения</string>
     <string name="settings_toolbar">Настройки и Премиум</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

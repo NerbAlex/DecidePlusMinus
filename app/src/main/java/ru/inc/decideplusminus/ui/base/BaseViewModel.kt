@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
-abstract class BaseViewModel<State: Any>(
+abstract class BaseViewModel<State>(
     protected val mutableLiveData: MutableLiveData<State> = MutableLiveData(),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
     ) : ViewModel() {

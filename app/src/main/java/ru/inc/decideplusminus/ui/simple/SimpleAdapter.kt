@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.inc.decideplusminus.databinding.ItemSimpleDecideBinding
-import ru.inc.decideplusminus.ui.models.SimpleDecide
+import ru.inc.decideplusminus.ui.models.SimpleSolution
 
 class SimpleAdapter : RecyclerView.Adapter<SimpleAdapter.DecideViewHolder>() {
 
-    var list: List<SimpleDecide> = listOf()
+    var list: List<SimpleSolution> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -23,7 +23,7 @@ class SimpleAdapter : RecyclerView.Adapter<SimpleAdapter.DecideViewHolder>() {
 
     inner class DecideViewHolder(val ui: ItemSimpleDecideBinding) : RecyclerView.ViewHolder(ui.root) {
 
-        fun bind(simpleDecide: SimpleDecide) {
+        fun bind(simpleSolution: SimpleSolution) {
 
         }
     }
