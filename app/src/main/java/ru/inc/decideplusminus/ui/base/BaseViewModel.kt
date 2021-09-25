@@ -13,7 +13,7 @@ abstract class BaseViewModel<State>(
     open fun getData(): LiveData<State> = mutableLiveData
 
     override fun onCleared() {
-        compositeDisposable.clear()
+        compositeDisposable.dispose()
         super.onCleared()
     }
 }

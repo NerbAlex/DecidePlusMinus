@@ -1,6 +1,6 @@
 package ru.inc.decideplusminus.ui.base
 
-abstract class Item {
+abstract class BaseItem {
 
     companion object {
         const val SIMPLE_DECIDE = 1
