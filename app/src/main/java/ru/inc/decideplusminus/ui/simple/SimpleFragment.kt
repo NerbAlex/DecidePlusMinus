@@ -42,7 +42,18 @@ class SimpleFragment : Fragment() {
     private fun viewModel() = ViewModelProvider(this, viewModelFactory).get(SimpleViewModel::class.java)
 
     private fun initRecyclerView() {
-        adapter = SimpleAdapter()
+        val listeners = object : SimpleAdapterListeners {
+            override fun clickAddArgument(): (SimpleSolution) -> Unit = {
+                //TODO вызываем шторку с добавление аргумента
+            }
+
+            override fun clickOpenDetailsArguments(): (SimpleSolution) -> Unit = {
+                //TODO переходим на страницу создания аргумента(можно здесь дернуть паблишсабджект, а в другом фрагменте получить,
+                //таким образом данные будут собираться в одном потоке, а создание фрагмента в другом параллельно - оптимизация )
+            }
+        }
+
+        adapter = SimpleAdapter(listeners)
         b.recycler.layoutManager = LinearLayoutManager(b.root.context, LinearLayoutManager.VERTICAL, false)
         b.recycler.setHasFixedSize(true)
         b.recycler.adapter = adapter
@@ -50,14 +61,13 @@ class SimpleFragment : Fragment() {
 
     private fun renderData(stateSimple: SimpleViewState) = when (stateSimple) {
         is SimpleViewState.Success -> {
-            adapter?.list = stateSimple.list
+            adapter?.submitList(stateSimple.list)
         }
-        SimpleViewState.Error -> TODO()
-        SimpleViewState.Loading -> TODO()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        adapter = null
     }
 }

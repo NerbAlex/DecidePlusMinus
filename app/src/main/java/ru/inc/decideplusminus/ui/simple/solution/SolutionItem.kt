@@ -1,4 +1,4 @@
-package ru.inc.decideplusminus.ui.models
+package ru.inc.decideplusminus.ui.simple.solution
 
 /**
  * Модель решения

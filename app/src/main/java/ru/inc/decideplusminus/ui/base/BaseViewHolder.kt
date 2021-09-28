@@ -2,7 +2,8 @@ package ru.inc.decideplusminus.ui.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 
-abstract class BaseViewHolder<I>(view: View) : RecyclerView.ViewHolder(view) {
-    abstract fun bind(item: I)
+abstract class BaseViewHolder<I>(view: ViewBinding) : RecyclerView.ViewHolder(view.root) {
+    abstract fun bind(model: I)
 }
