@@ -2,6 +2,7 @@ package ru.inc.decideplusminus.model.repositories
 
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import ru.inc.decideplusminus.ui.models.TeacherSimpleItem
 import ru.inc.decideplusminus.ui.simple.BaseSimpleSolutionItem
 import ru.inc.decideplusminus.ui.simple.SimpleSolution
 import ru.inc.decideplusminus.view_model.simple.SimpleViewState
@@ -10,7 +11,12 @@ import ru.inc.decideplusminus.view_model.simple.SolutionRepository
 class SimpleSolutionRepositoryImpl(val simple: SimpleLocalDataSource) :
     SolutionRepository<SimpleViewState> {
 
-    private val list = listOf<SimpleSolution>(
+    private val list = listOf(
+        TeacherSimpleItem(
+            id = 0,
+            type = BaseSimpleSolutionItem.TEACHER,
+            isActive = true
+        ),
         SimpleSolution(
             id = 1,
             type = BaseSimpleSolutionItem.POSITIVE,
