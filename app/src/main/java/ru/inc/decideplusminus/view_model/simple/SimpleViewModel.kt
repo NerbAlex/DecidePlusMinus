@@ -8,6 +8,8 @@ class SimpleViewModel @Inject constructor(private val repository: SolutionReposi
 
 
     fun start() {
-        TODO()
+        compositeDisposable.add(repository.downloadData().subscribe({
+            mutableLiveData.postValue(it)
+        }, {}))
     }
 }
