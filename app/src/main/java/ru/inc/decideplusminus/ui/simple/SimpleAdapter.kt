@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import ru.inc.decideplusminus.databinding.ItemSimpleSolutionNegativeBinding
 import ru.inc.decideplusminus.databinding.ItemSimpleSolutionPositiveBinding
+import ru.inc.decideplusminus.databinding.ItemTeacherSolutionBinding
 import ru.inc.decideplusminus.ui.base.BaseViewHolder
+import ru.inc.decideplusminus.ui.base.TeacherVH
 
 class SimpleAdapter(private val listeners: SimpleAdapterListeners) :
     ListAdapter<BaseSimpleSolutionItem, BaseViewHolder<BaseSimpleSolutionItem>>(SimpleSolutionDiff()) {
@@ -18,6 +20,9 @@ class SimpleAdapter(private val listeners: SimpleAdapterListeners) :
                 )
                 BaseSimpleSolutionItem.NEGATIVE -> SimpleSolutionNegativeVH(
                     ItemSimpleSolutionNegativeBinding.inflate(inflater, parent, false)
+                )
+                BaseSimpleSolutionItem.TEACHER -> TeacherVH(
+                    ItemTeacherSolutionBinding.inflate(inflater, parent, false)
                 )
                 else -> throw IllegalArgumentException("Unknown viewType")
             }
