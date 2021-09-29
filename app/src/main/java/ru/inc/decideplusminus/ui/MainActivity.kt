@@ -1,13 +1,9 @@
 package ru.inc.decideplusminus.ui
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ru.inc.decideplusminus.R
 import ru.inc.decideplusminus.databinding.ActivityMainBinding
@@ -34,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         binding.toolbar.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
 
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
     }
