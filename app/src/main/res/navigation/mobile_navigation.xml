@@ -9,7 +9,15 @@
         android:id="@+id/navigation_home"
         android:name="ru.inc.decideplusminus.ui.simple.SimpleFragment"
         android:label="@string/simple_toolbar"
-        tools:layout="@layout/fragment_simple" />
+        tools:layout="@layout/fragment_simple" >
+        <action
+            android:id="@+id/action_navigation_home_to_simpleSolutionFragment"
+            app:destination="@id/simpleSolutionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +30,13 @@
         android:name="ru.inc.decideplusminus.ui.settings.SettingsFragment"
         android:label="@string/settings_toolbar"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/simpleSolutionFragment"
+        android:name="ru.inc.decideplusminus.ui.simple.solution.SimpleSolutionFragment"
+        android:label="{toolbarName}"
+        tools:layout="@layout/fragment_simple_solution" >
+        <argument
+            android:name="toolbarName"
+            app:argType="string" />
+    </fragment>
 </navigation>
