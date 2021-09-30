@@ -16,10 +16,10 @@ class SimpleAdapter(private val listeners: SimpleAdapterListeners) :
         LayoutInflater.from(parent.context).let { inflater ->
             return when (viewType) {
                 BaseSimpleSolutionItem.POSITIVE -> SimpleSolutionPositiveVH(
-                    ItemSimpleSolutionPositiveBinding.inflate(inflater, parent, false)
+                    ItemSimpleSolutionPositiveBinding.inflate(inflater, parent, false), listeners
                 )
                 BaseSimpleSolutionItem.NEGATIVE -> SimpleSolutionNegativeVH(
-                    ItemSimpleSolutionNegativeBinding.inflate(inflater, parent, false)
+                    ItemSimpleSolutionNegativeBinding.inflate(inflater, parent, false), listeners
                 )
                 BaseSimpleSolutionItem.TEACHER -> TeacherVH(
                     ItemTeacherSolutionBinding.inflate(inflater, parent, false)

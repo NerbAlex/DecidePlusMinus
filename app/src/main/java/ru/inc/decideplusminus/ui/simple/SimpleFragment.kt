@@ -6,14 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
 import ru.inc.decideplusminus.ui.MyApp
+import ru.inc.decideplusminus.ui.simple.solution.SimpleSolutionFragment
+import ru.inc.decideplusminus.ui.simple.solution.SimpleSolutionFragmentArgs
 import ru.inc.decideplusminus.view_model.simple.SimpleViewModel
 import ru.inc.decideplusminus.view_model.simple.SimpleViewState
 import javax.inject.Inject
 
 class SimpleFragment : Fragment() {
+
+    //TODO Напоминание подливать во все ветки дев, а дев всегда обновлять свежими данными, если они нужны для других веток
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -48,6 +53,10 @@ class SimpleFragment : Fragment() {
             }
 
             override fun clickOpenDetailsArguments(): (SimpleSolution) -> Unit = {
+                SimpleFragmentDirections.actionNavigationHomeToSimpleSolutionFragment(it.name).let { action ->
+                    findNavController().navigate(action)
+                }
+
                 //TODO переходим на страницу создания аргумента(можно здесь дернуть паблишсабджект, а в другом фрагменте получить,
                 //таким образом данные будут собираться в одном потоке, а создание фрагмента в другом параллельно - оптимизация )
             }
