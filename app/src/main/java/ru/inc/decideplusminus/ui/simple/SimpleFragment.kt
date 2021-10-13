@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class SimpleFragment : Fragment() {
 
-    //TODO Напоминание подливать во все ветки дев, а дев всегда обновлять свежими данными, если они нужны для других веток
+    //TODO базовый класс для фрагментов
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
