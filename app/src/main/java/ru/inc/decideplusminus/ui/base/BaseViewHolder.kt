@@ -1,6 +1,5 @@
 package ru.inc.decideplusminus.ui.base
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 

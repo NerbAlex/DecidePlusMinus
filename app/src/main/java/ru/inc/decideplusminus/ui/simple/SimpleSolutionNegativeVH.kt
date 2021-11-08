@@ -1,12 +1,15 @@
 package ru.inc.decideplusminus.ui.simple
 
-import ru.inc.decideplusminus.databinding.ItemSimpleSolutionNegativeBinding
+import ru.inc.decideplusminus.databinding.ItemSimpleNegativeVhBinding
 import ru.inc.decideplusminus.ui.base.BaseViewHolder
 
-class SimpleSolutionNegativeVH(private val view: ItemSimpleSolutionNegativeBinding, val listeners: SimpleAdapterListeners) :
-    BaseViewHolder<BaseSimpleSolutionItem>(view) {
-    override fun bind(model: BaseSimpleSolutionItem) {
-        val simpleSolutionModel = model as SimpleSolution
+class SimpleSolutionNegativeVH(
+    private val view: ItemSimpleNegativeVhBinding,
+    private val listeners: SimpleAdapterListeners
+) :
+    BaseViewHolder<BaseSimpleItem>(view) {
+    override fun bind(model: BaseSimpleItem) {
+        val simpleSolutionModel = model as SimpleVO
 
         view.nameSolutionTv.text = simpleSolutionModel.name
         view.percentTv.text = simpleSolutionModel.percent

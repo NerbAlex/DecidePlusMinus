@@ -1,9 +1,9 @@
 package ru.inc.decideplusminus.view_model.simple
 
-import ru.inc.decideplusminus.ui.simple.BaseSimpleSolutionItem
+import ru.inc.decideplusminus.ui.simple.BaseSimpleItem
 
 sealed class SimpleViewState {
 
-    data class Success(val list: List<BaseSimpleSolutionItem>): SimpleViewState()
+    data class Success(val list: List<BaseSimpleItem>): SimpleViewState()
 
 }

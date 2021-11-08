@@ -1,6 +1,6 @@
 package ru.inc.decideplusminus.ui.simple
 
-abstract class BaseSimpleSolutionItem {
+abstract class BaseSimpleItem {
     //TODO оставить, в будущем здесь появятся другие виджеты
     companion object {
         const val POSITIVE = 1

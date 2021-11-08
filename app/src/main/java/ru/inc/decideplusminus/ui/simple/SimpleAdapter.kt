@@ -1,37 +1,18 @@
 package ru.inc.decideplusminus.ui.simple
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import ru.inc.decideplusminus.databinding.ItemSimpleSolutionNegativeBinding
-import ru.inc.decideplusminus.databinding.ItemSimpleSolutionPositiveBinding
-import ru.inc.decideplusminus.databinding.ItemTeacherSolutionBinding
 import ru.inc.decideplusminus.ui.base.BaseViewHolder
-import ru.inc.decideplusminus.ui.base.TeacherVH
+import ru.inc.decideplusminus.ui.base.ViewHoldersFactory
 
 class SimpleAdapter(private val listeners: SimpleAdapterListeners) :
-    ListAdapter<BaseSimpleSolutionItem, BaseViewHolder<BaseSimpleSolutionItem>>(SimpleSolutionDiff()) {
+    ListAdapter<BaseSimpleItem, BaseViewHolder<BaseSimpleItem>>(SimpleDiff()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BaseSimpleSolutionItem> =
-        LayoutInflater.from(parent.context).let { inflater ->
-            return when (viewType) {
-                BaseSimpleSolutionItem.POSITIVE -> SimpleSolutionPositiveVH(
-                    ItemSimpleSolutionPositiveBinding.inflate(inflater, parent, false), listeners
-                )
-                BaseSimpleSolutionItem.NEGATIVE -> SimpleSolutionNegativeVH(
-                    ItemSimpleSolutionNegativeBinding.inflate(inflater, parent, false), listeners
-                )
-                BaseSimpleSolutionItem.TEACHER -> TeacherVH(
-                    ItemTeacherSolutionBinding.inflate(inflater, parent, false)
-                )
-                else -> throw IllegalArgumentException("Unknown viewType")
-            }
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BaseSimpleItem> =
+        ViewHoldersFactory.create(viewType, parent, listeners)
 
-    override fun onBindViewHolder(holder: BaseViewHolder<BaseSimpleSolutionItem>, position: Int) =
+    override fun onBindViewHolder(holder: BaseViewHolder<BaseSimpleItem>, position: Int) =
         holder.bind(getItem(position))
 
     override fun getItemViewType(position: Int) = getItem(position).type
-
-
 }

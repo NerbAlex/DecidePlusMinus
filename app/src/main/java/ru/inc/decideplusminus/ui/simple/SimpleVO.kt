@@ -8,9 +8,9 @@ package ru.inc.decideplusminus.ui.simple
  * @param type - текущий статус за/против и тип VH
  * @param percent - процент за/против
  */
-data class SimpleSolution(
+data class SimpleVO(
     override val id: Long,
     override val type: Int,
     val name: String,
     val percent: String
-): BaseSimpleSolutionItem()
+): BaseSimpleItem()

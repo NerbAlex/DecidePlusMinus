@@ -36,11 +36,11 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
 
     private fun initRecyclerView() {
         val listeners = object : SimpleAdapterListeners {
-            override fun clickAddArgument(): (SimpleSolution) -> Unit = {
+            override fun clickAddArgument(): (SimpleVO) -> Unit = {
                 //TODO вызываем шторку с добавление аргумента
             }
 
-            override fun clickOpenDetailsArguments(): (SimpleSolution) -> Unit = {
+            override fun clickOpenDetailsArguments(): (SimpleVO) -> Unit = {
                 SimpleFragmentDirections.actionNavigationHomeToSimpleSolutionFragment(it.name).let { action ->
                     findNavController().navigate(action)
                 }
