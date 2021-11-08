@@ -32,9 +32,9 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/simpleSolutionFragment"
-        android:name="ru.inc.decideplusminus.ui.simple.solution.SimpleSolutionFragment"
+        android:name="ru.inc.decideplusminus.ui.simple.solution.SimpleDetailsFragment"
         android:label="{toolbarName}"
-        tools:layout="@layout/fragment_simple_solution" >
+        tools:layout="@layout/fragment_simple_details" >
         <argument
             android:name="toolbarName"
             app:argType="string" />
