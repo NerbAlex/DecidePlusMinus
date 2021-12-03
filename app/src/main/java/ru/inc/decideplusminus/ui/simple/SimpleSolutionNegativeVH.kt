@@ -14,8 +14,12 @@ class SimpleSolutionNegativeVH(
         view.nameSolutionTv.text = simpleSolutionModel.name
         view.percentTv.text = simpleSolutionModel.percent
 
-        view.root.setOnClickListener {
+        view.openSolutionBtn.setOnClickListener {
             listeners.clickOpenDetailsArguments().invoke(simpleSolutionModel)
+        }
+
+        view.addArgumentBtn.setOnClickListener {
+            listeners.clickAddArgument().invoke(simpleSolutionModel)
         }
     }
 }

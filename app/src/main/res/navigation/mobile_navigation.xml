@@ -17,6 +17,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_home_to_bottomSheetAddSolution"
+            app:destination="@id/bottomSheetAddSolution" />
     </fragment>
 
     <fragment
@@ -39,4 +42,8 @@
             android:name="toolbarName"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomSheetAddSolution"
+        android:name="ru.inc.decideplusminus.ui.BottomSheetAddSolution"
+        android:label="BottomSheetAddSolution" />
 </navigation>

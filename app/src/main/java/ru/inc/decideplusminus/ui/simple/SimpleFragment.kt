@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
+import ru.inc.decideplusminus.ui.BottomSheetAddSolution
 import ru.inc.decideplusminus.ui.MyApp
 import ru.inc.decideplusminus.ui.base.BaseFragment
 import ru.inc.decideplusminus.view_model.simple.SimpleViewModel
@@ -37,7 +38,10 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
     private fun initRecyclerView() {
         val listeners = object : SimpleAdapterListeners {
             override fun clickAddArgument(): (SimpleVO) -> Unit = {
-                //TODO вызываем шторку с добавление аргумента
+                // TODO передавать SimpleVo в BottomSheetFragment
+                SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddSolution().let { action ->
+                    findNavController().navigate(action)
+                }
             }
 
             override fun clickOpenDetailsArguments(): (SimpleVO) -> Unit = {

@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/add_circle.xml" value="0.4036458333333333" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/mic.xml" value="0.4036458333333333" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/remove_circle.xml" value="0.4036458333333333" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_bottom_sheet_add_solution.xml" value="0.3875" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/item_simple_positive_vh.xml" value="0.3875" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
