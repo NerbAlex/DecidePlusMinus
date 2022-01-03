@@ -28,8 +28,10 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
     }
 
     private fun initListeners() {
-        binding.floatingActionButton.setOnClickListener {
-
+        binding.createNewSolution.setOnClickListener {
+            SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddSimpleSolution().let { action ->
+                findNavController().navigate(action)
+            }
         }
     }
 
@@ -45,7 +47,7 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
         val listeners = object : SimpleAdapterListeners {
             override fun clickAddArgument(): (SimpleVO) -> Unit = {
                 // TODO передавать SimpleVo в BottomSheetFragment
-                SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddSolution().let { action ->
+                SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddInnerSolution().let { action ->
                     findNavController().navigate(action)
                 }
             }

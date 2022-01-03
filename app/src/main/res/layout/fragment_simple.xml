@@ -17,7 +17,7 @@
         tools:listitem="@layout/item_simple_positive_vh" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/createNewSolution"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/add_solution"

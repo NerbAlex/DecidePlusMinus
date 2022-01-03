@@ -18,8 +18,8 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
-            android:id="@+id/action_navigation_home_to_bottomSheetAddSolution"
-            app:destination="@id/bottomSheetAddSolution" />
+            android:id="@+id/action_navigation_home_to_bottomSheetAddInnerSolution"
+            app:destination="@id/bottomSheetAddInnerSolution" />
         <action
             android:id="@+id/action_navigation_home_to_bottomSheetAddSimpleSolution"
             app:destination="@id/bottomSheetAddSimpleSolution" />
@@ -40,7 +40,7 @@
             app:argType="string" />
     </fragment>
     <dialog
-        android:id="@+id/bottomSheetAddSolution"
+        android:id="@+id/bottomSheetAddInnerSolution"
         android:name="ru.inc.decideplusminus.ui.BottomSheetAddInnerSolution"
         android:label="BottomSheetAddSolution" />
     <dialog
