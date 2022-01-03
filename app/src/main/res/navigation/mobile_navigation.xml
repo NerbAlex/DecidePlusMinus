@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_navigation_home_to_bottomSheetAddSolution"
             app:destination="@id/bottomSheetAddSolution" />
+        <action
+            android:id="@+id/action_navigation_home_to_bottomSheetAddSimpleSolution"
+            app:destination="@id/bottomSheetAddSimpleSolution" />
     </fragment>
 
     <fragment
@@ -44,6 +47,10 @@
     </fragment>
     <dialog
         android:id="@+id/bottomSheetAddSolution"
-        android:name="ru.inc.decideplusminus.ui.BottomSheetAddSolution"
+        android:name="ru.inc.decideplusminus.ui.BottomSheetAddInnerSolution"
         android:label="BottomSheetAddSolution" />
+    <dialog
+        android:id="@+id/bottomSheetAddSimpleSolution"
+        android:name="ru.inc.decideplusminus.ui.simple.BottomSheetAddSimpleSolution"
+        android:label="BottomSheetAddSimpleSolution" />
 </navigation>

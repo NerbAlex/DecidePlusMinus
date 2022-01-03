@@ -3,11 +3,11 @@ package ru.inc.decideplusminus.ui
 import android.os.Bundle
 import android.view.View
 import ru.inc.decideplusminus.R
-import ru.inc.decideplusminus.databinding.FragmentBottomSheetAddSolutionBinding
+import ru.inc.decideplusminus.databinding.FragmentBottomSheetAddInnerSolutionBinding
 import ru.inc.decideplusminus.ui.base.BaseBottomSheetFragment
 
-class BottomSheetAddSolution :
-    BaseBottomSheetFragment<FragmentBottomSheetAddSolutionBinding>(FragmentBottomSheetAddSolutionBinding::inflate) {
+class BottomSheetAddInnerSolution :
+    BaseBottomSheetFragment<FragmentBottomSheetAddInnerSolutionBinding>(FragmentBottomSheetAddInnerSolutionBinding::inflate) {
 
     var flag = true
 

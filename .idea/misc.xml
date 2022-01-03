@@ -4,9 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/add_circle.xml" value="0.4036458333333333" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/add_solution.xml" value="0.3828125" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/mic.xml" value="0.4036458333333333" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/remove_circle.xml" value="0.4036458333333333" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_bottom_sheet_add_inner_solution.xml" value="0.20572916666666666" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_bottom_sheet_add_simple_solution.xml" value="0.3875" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_bottom_sheet_add_solution.xml" value="0.3875" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_complex.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_simple.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/item_simple_positive_vh.xml" value="0.3875" />
       </map>
     </option>
