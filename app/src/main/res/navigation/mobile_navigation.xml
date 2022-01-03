@@ -26,12 +26,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="ru.inc.decideplusminus.ui.complex.ComplexFragment"
-        android:label="@string/complex_toolbar"
-        tools:layout="@layout/fragment_complex" />
-
-    <fragment
         android:id="@+id/navigation_notifications"
         android:name="ru.inc.decideplusminus.ui.settings.SettingsFragment"
         android:label="@string/settings_toolbar"
