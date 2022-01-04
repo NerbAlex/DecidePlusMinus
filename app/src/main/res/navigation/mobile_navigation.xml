@@ -45,6 +45,6 @@
         android:label="BottomSheetAddSolution" />
     <dialog
         android:id="@+id/bottomSheetAddSimpleSolution"
-        android:name="ru.inc.decideplusminus.ui.simple.BottomSheetAddSimpleSolution"
+        android:name="ru.inc.decideplusminus.ui.simple.BottomSheetCreateSimpleSolution"
         android:label="BottomSheetAddSimpleSolution" />
 </navigation>

@@ -6,28 +6,27 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
-import ru.inc.decideplusminus.ui.MyApp
 import ru.inc.decideplusminus.ui.base.BaseFragment
 import ru.inc.decideplusminus.view_model.simple.SimpleViewModel
 import ru.inc.decideplusminus.view_model.simple.SimpleViewState
-import javax.inject.Inject
 
 class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding::inflate) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: SimpleViewModel by lazy { viewModel() }
+    //TODO при клике добавить вложенный +/- показывать заголовок решения во всплывающем bottomSheet
+
+    lateinit var viewModel: SimpleViewModel
 
     private var adapter: SimpleAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        observeData()
+        initViewModel()
         initListeners()
     }
 
     private fun initListeners() {
+        //TODO если голосовое управление, показывать всплывающую подсказку в начале списка
         binding.createNewSolution.setOnClickListener {
             SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddSimpleSolution().let { action ->
                 findNavController().navigate(action)
@@ -35,13 +34,11 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
         }
     }
 
-    private fun observeData() {
-        MyApp.instance.appComponent.inject(this)
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(SimpleViewModel::class.java)
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
         viewModel.start()
     }
-
-    private fun viewModel() = ViewModelProvider(this, viewModelFactory).get(SimpleViewModel::class.java)
 
     private fun initRecyclerView() {
         val listeners = object : SimpleAdapterListeners {

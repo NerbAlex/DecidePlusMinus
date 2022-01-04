@@ -4,9 +4,9 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import ru.inc.decideplusminus.ui.simple.BaseSimpleItem
 
-interface SolutionRepository<State> {
+interface SimpleRepository{
 
-    fun downloadData(): Single<State>
+    fun downloadData(): Single<SimpleViewState>
     fun updateData(baseSimpleItem: BaseSimpleItem): Completable
 
 }

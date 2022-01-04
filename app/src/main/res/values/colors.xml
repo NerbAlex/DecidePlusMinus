@@ -16,5 +16,9 @@
 
     <color name="red">#AE4F62</color>
 
+    <color name="neutral_light">#ADE3FB</color>
+    <color name="neutral">#54C6FA</color>
+
+
 
 </resources>

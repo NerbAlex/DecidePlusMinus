@@ -5,13 +5,17 @@ import io.reactivex.rxjava3.core.Single
 import ru.inc.decideplusminus.ui.models.TeacherSimpleItem
 import ru.inc.decideplusminus.ui.simple.BaseSimpleItem
 import ru.inc.decideplusminus.ui.simple.SimpleVO
+import ru.inc.decideplusminus.view_model.simple.CreateSimpleRepository
 import ru.inc.decideplusminus.view_model.simple.SimpleViewState
-import ru.inc.decideplusminus.view_model.simple.SolutionRepository
+import ru.inc.decideplusminus.view_model.simple.SimpleRepository
 
-class SimpleSolutionRepositoryImpl(val simple: SimpleLocalDataSource) :
-    SolutionRepository<SimpleViewState> {
+object SimpleRepositoryImpl :  SimpleRepository, CreateSimpleRepository {
 
-    private val list = listOf(
+    fun test() {
+
+    }
+
+    private val list = mutableListOf(
         TeacherSimpleItem(
             id = 0,
             type = BaseSimpleItem.TEACHER,
@@ -36,13 +40,13 @@ class SimpleSolutionRepositoryImpl(val simple: SimpleLocalDataSource) :
             percent = "88%"
         ),
         SimpleVO(
-            id = 1,
+            id = 4,
             type = BaseSimpleItem.POSITIVE,
             name = "Найти девушку",
             percent = "63%"
         ),
         SimpleVO(
-            id = 1,
+            id = 5,
             type = BaseSimpleItem.POSITIVE,
             name = "Сходить в кино на Venom2",
             percent = "70%"
@@ -55,5 +59,15 @@ class SimpleSolutionRepositoryImpl(val simple: SimpleLocalDataSource) :
 
     override fun updateData(baseSimpleItem: BaseSimpleItem): Completable {
         TODO()
+    }
+
+    override fun createSimpleSolution(name: String): Completable {
+        list.add(SimpleVO(
+            id = 6,
+            type = BaseSimpleItem.NEUTRAL,
+            name = name,
+            percent = ""
+        ))
+        return Completable.complete()
     }
 }

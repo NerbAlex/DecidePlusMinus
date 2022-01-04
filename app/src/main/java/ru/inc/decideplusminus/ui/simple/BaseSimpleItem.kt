@@ -6,6 +6,7 @@ abstract class BaseSimpleItem {
         const val POSITIVE = 1
         const val NEGATIVE = 2
         const val TEACHER = 3
+        const val NEUTRAL = 4
 
     }
 
