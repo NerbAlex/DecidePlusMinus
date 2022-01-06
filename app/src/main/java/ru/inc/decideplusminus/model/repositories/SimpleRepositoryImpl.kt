@@ -1,15 +1,21 @@
 package ru.inc.decideplusminus.model.repositories
 
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.subjects.PublishSubject
 import ru.inc.decideplusminus.ui.models.TeacherSimpleItem
 import ru.inc.decideplusminus.ui.simple.BaseSimpleItem
 import ru.inc.decideplusminus.ui.simple.SimpleVO
+import ru.inc.decideplusminus.view_model.simple.AddInnerSimpleRepository
 import ru.inc.decideplusminus.view_model.simple.CreateSimpleRepository
 import ru.inc.decideplusminus.view_model.simple.SimpleViewState
 import ru.inc.decideplusminus.view_model.simple.SimpleRepository
 
-object SimpleRepositoryImpl :  SimpleRepository, CreateSimpleRepository {
+object SimpleRepositoryImpl :  SimpleRepository, CreateSimpleRepository, AddInnerSimpleRepository {
+
+    override val simplePS: PublishSubject<SimpleViewState> = PublishSubject.create()
 
     fun test() {
 
@@ -53,8 +59,11 @@ object SimpleRepositoryImpl :  SimpleRepository, CreateSimpleRepository {
         ),
     )
 
-    override fun downloadData(): Single<SimpleViewState> =
-        Single.just(SimpleViewState.Success(list))
+    override fun downloadData() {
+        val newList: MutableList<BaseSimpleItem> = mutableListOf()
+        newList.addAll(list)
+        simplePS.onNext(SimpleViewState.Success(newList))
+    }
 
 
     override fun updateData(baseSimpleItem: BaseSimpleItem): Completable {
@@ -62,12 +71,14 @@ object SimpleRepositoryImpl :  SimpleRepository, CreateSimpleRepository {
     }
 
     override fun createSimpleSolution(name: String): Completable {
-        list.add(SimpleVO(
+        val newVO = SimpleVO(
             id = 6,
             type = BaseSimpleItem.NEUTRAL,
             name = name,
             percent = ""
-        ))
+        )
+        list.add(newVO)
+        downloadData()
         return Completable.complete()
     }
 }

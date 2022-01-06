@@ -5,10 +5,13 @@ import ru.inc.decideplusminus.ui.base.BaseViewModel
 
 class SimpleViewModel : BaseViewModel<SimpleViewState, SimpleRepository>(SimpleRepositoryImpl) {
 
-    fun start() {
-        repository.downloadData()
-        compositeDisposable.add(repository.downloadData().subscribe({
-            mutableLiveData.postValue(it)
+    init {
+        compositeDisposable.add(repository.simplePS.subscribe({ state ->
+            mutableLiveData.postValue(state)
         }, {}))
+    }
+
+    fun downloadData() {
+        repository.downloadData()
     }
 }

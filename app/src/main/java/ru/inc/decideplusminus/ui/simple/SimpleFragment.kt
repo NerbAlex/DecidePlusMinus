@@ -14,6 +14,8 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
 
     //TODO при клике добавить вложенный +/- показывать заголовок решения во всплывающем bottomSheet
 
+    //TODO посмотреть в ресайклер сбера, если  там скролится к добавленному итему, сделать так же с новым решением
+
     lateinit var viewModel: SimpleViewModel
 
     private var adapter: SimpleAdapter? = null
@@ -37,7 +39,7 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
     private fun initViewModel() {
         viewModel = ViewModelProvider(this).get(SimpleViewModel::class.java)
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
-        viewModel.start()
+        viewModel.downloadData()
     }
 
     private fun initRecyclerView() {
@@ -71,8 +73,14 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val a = 10
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         adapter = null
     }
+
 }

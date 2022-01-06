@@ -4,10 +4,10 @@ import androidx.recyclerview.widget.DiffUtil
 
 class SimpleDiff: DiffUtil.ItemCallback<BaseSimpleItem>() {
     override fun areItemsTheSame(oldItem: BaseSimpleItem, newItem: BaseSimpleItem): Boolean {
-        TODO("Not yet implemented")
+        return oldItem == newItem
     }
 
     override fun areContentsTheSame(oldItem: BaseSimpleItem, newItem: BaseSimpleItem): Boolean {
-        TODO("Not yet implemented")
+        return oldItem == newItem
     }
 }
