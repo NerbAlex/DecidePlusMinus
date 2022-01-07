@@ -12,6 +12,8 @@ import ru.inc.decideplusminus.view_model.simple.SimpleViewState
 
 class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding::inflate) {
 
+    //TODO подрубить tooltip для обучения пользователя
+
     lateinit var viewModel: SimpleViewModel
 
     private var adapter: SimpleAdapter? = null
