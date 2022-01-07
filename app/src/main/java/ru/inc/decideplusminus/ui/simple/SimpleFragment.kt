@@ -12,10 +12,6 @@ import ru.inc.decideplusminus.view_model.simple.SimpleViewState
 
 class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding::inflate) {
 
-    //TODO при клике добавить вложенный +/- показывать заголовок решения во всплывающем bottomSheet
-
-    //TODO посмотреть в ресайклер сбера, если  там скролится к добавленному итему, сделать так же с новым решением
-
     lateinit var viewModel: SimpleViewModel
 
     private var adapter: SimpleAdapter? = null
@@ -45,7 +41,7 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
     private fun initRecyclerView() {
         val listeners = object : SimpleAdapterListeners {
             override fun clickAddArgument(): (SimpleVO) -> Unit = {
-                // TODO передавать SimpleVo в BottomSheetFragment
+                // TODO передавать еще имя кликнутого решения
                 SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddInnerSolution(it.id).let { action ->
                     findNavController().navigate(action)
                 }
@@ -55,9 +51,6 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
                 SimpleFragmentDirections.actionNavigationHomeToSimpleSolutionFragment(it.name).let { action ->
                     findNavController().navigate(action)
                 }
-
-                //TODO переходим на страницу создания аргумента(можно здесь дернуть паблишсабджект, а в другом фрагменте получить,
-                //таким образом данные будут собираться в одном потоке, а создание фрагмента в другом параллельно - оптимизация )
             }
         }
 
@@ -73,14 +66,8 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        val a = 10
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         adapter = null
     }
-
 }

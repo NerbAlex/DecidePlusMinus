@@ -7,6 +7,8 @@ import ru.inc.decideplusminus.ui.base.BaseFragment
 
 class SimpleDetailsFragment : BaseFragment<FragmentSimpleDetailsBinding>(FragmentSimpleDetailsBinding::inflate) {
 
+    //TODO передавать сюда id решения, в репе хранить мапу ключ - parentId, значение - лист вложенных аргументов
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
