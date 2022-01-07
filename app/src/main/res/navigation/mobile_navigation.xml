@@ -42,7 +42,11 @@
     <dialog
         android:id="@+id/bottomSheetAddInnerSolution"
         android:name="ru.inc.decideplusminus.ui.BottomSheetAddInnerSolution"
-        android:label="BottomSheetAddSolution" />
+        android:label="BottomSheetAddSolution" >
+        <argument
+            android:name="solutionId"
+            app:argType="long" />
+    </dialog>
     <dialog
         android:id="@+id/bottomSheetAddSimpleSolution"
         android:name="ru.inc.decideplusminus.ui.simple.BottomSheetCreateSimpleSolution"

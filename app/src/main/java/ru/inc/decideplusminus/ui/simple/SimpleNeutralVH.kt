@@ -13,6 +13,7 @@ class SimpleNeutralVH(
         val simpleSolutionModel = model as SimpleVO
 
         view.nameSolutionTv.text = simpleSolutionModel.name
+        view.percent.text = simpleSolutionModel.percent
 
         view.openSolutionBtn.setOnClickListener {
             listeners.clickOpenDetailsArguments().invoke(simpleSolutionModel)

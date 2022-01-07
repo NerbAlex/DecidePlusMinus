@@ -2,12 +2,25 @@ package ru.inc.decideplusminus.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import ru.inc.decideplusminus.R
 import ru.inc.decideplusminus.databinding.FragmentBottomSheetAddInnerSolutionBinding
 import ru.inc.decideplusminus.ui.base.BaseBottomSheetFragment
+import ru.inc.decideplusminus.view_model.simple.AddInnerSimpleViewModel
+import ru.inc.decideplusminus.view_model.simple.AddInnerSimpleViewState
+import ru.inc.decideplusminus.view_model.simple.CreateSimpleViewModel
+import ru.inc.decideplusminus.view_model.simple.CreateSimpleViewState
 
 class BottomSheetAddInnerSolution :
     BaseBottomSheetFragment<FragmentBottomSheetAddInnerSolutionBinding>(FragmentBottomSheetAddInnerSolutionBinding::inflate) {
+
+    private lateinit var viewModel: AddInnerSimpleViewModel
+    private val navArgs: BottomSheetAddInnerSolutionArgs by navArgs()
+    private var solutionId: Long? = null
+    private var argumentLvl: Int = 2
+
 
     var flag = true
 
@@ -25,6 +38,9 @@ class BottomSheetAddInnerSolution :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        getArgs()
+        initViewModel()
 
         // TODO При дизайне закруглить диалог
 
@@ -46,9 +62,24 @@ class BottomSheetAddInnerSolution :
         }
 
         binding.minus.setOnClickListener {
-
+            viewModel.minus(solutionId, argumentLvl)
         }
 
-        binding.plus.setOnClickListener {  }
+        binding.plus.setOnClickListener {
+            viewModel.plus(solutionId, argumentLvl)
+        }
+    }
+
+    private fun getArgs() {
+        solutionId = navArgs.solutionId
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(AddInnerSimpleViewModel::class.java)
+        viewModel.getData().observe(viewLifecycleOwner) { state ->
+            when (state) {
+                AddInnerSimpleViewState.completedAdd -> findNavController().popBackStack()
+            }
+        }
     }
 }

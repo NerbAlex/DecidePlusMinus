@@ -12,5 +12,7 @@ data class SimpleVO(
     override val id: Long,
     override val type: Int,
     val name: String,
-    val percent: String
+    val percent: String,
+    val positiveCount: Int = 0,
+    val negativeCount: Int = 0
 ): BaseSimpleItem()

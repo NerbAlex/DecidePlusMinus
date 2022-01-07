@@ -46,7 +46,7 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
         val listeners = object : SimpleAdapterListeners {
             override fun clickAddArgument(): (SimpleVO) -> Unit = {
                 // TODO передавать SimpleVo в BottomSheetFragment
-                SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddInnerSolution().let { action ->
+                SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddInnerSolution(it.id).let { action ->
                     findNavController().navigate(action)
                 }
             }
