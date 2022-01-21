@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.ListAdapter
 import ru.inc.decideplusminus.ui.base.BaseViewHolder
 import ru.inc.decideplusminus.ui.base.ViewHoldersFactory
 
-class SimpleAdapter(private val listeners: SimpleAdapterListeners) :
+class SimpleAdapter(private val listeners: SimpleAdapterListener) :
     ListAdapter<BaseSimpleItem, BaseViewHolder<BaseSimpleItem>>(SimpleDiff()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BaseSimpleItem> =

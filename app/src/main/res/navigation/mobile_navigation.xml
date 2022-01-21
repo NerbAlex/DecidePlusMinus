@@ -32,12 +32,16 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/simpleSolutionFragment"
-        android:name="ru.inc.decideplusminus.ui.simple.solution.SimpleDetailsFragment"
+        android:name="ru.inc.decideplusminus.ui.simple.details.SimpleDetailsFragment"
         android:label="{toolbarName}"
         tools:layout="@layout/fragment_simple_details" >
         <argument
             android:name="toolbarName"
             app:argType="string" />
+        <argument
+            android:name="parentId"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheetAddInnerSolution"

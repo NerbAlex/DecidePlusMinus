@@ -1,18 +1,23 @@
 package ru.inc.decideplusminus.model.repositories
 
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.PublishSubject
 import ru.inc.decideplusminus.ui.models.TeacherSimpleItem
 import ru.inc.decideplusminus.ui.simple.BaseSimpleItem
 import ru.inc.decideplusminus.ui.simple.SimpleVO
-import ru.inc.decideplusminus.ui.simple.solution.SolutionItem
+import ru.inc.decideplusminus.ui.simple.details.SimpleDetailsVO
 import ru.inc.decideplusminus.view_model.simple.AddInnerSimpleRepository
 import ru.inc.decideplusminus.view_model.simple.CreateSimpleRepository
 import ru.inc.decideplusminus.view_model.simple.SimpleViewState
 import ru.inc.decideplusminus.view_model.simple.SimpleRepository
+import ru.inc.decideplusminus.view_model.simple.details.SimpleDetailsRepository
+import ru.inc.decideplusminus.view_model.simple.details.SimpleDetailsViewState
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
-object SimpleRepositoryImpl : SimpleRepository, CreateSimpleRepository, AddInnerSimpleRepository {
+object SimpleRepositoryImpl : SimpleRepository, CreateSimpleRepository, AddInnerSimpleRepository,
+    SimpleDetailsRepository {
 
     override val simplePS: PublishSubject<SimpleViewState> = PublishSubject.create()
 
@@ -20,46 +25,10 @@ object SimpleRepositoryImpl : SimpleRepository, CreateSimpleRepository, AddInner
 
     }
 
-    private val listInnerSolution = mutableListOf<SolutionItem>()
+    //TODO сохранение вложенного аргумента с текстом
+    private val listInnerSolution = mutableMapOf<Long, MutableList<SimpleDetailsVO>>()
     private val listSolution = mutableListOf<BaseSimpleItem>()
 
-    private val list = mutableListOf(
-        TeacherSimpleItem(
-            id = 0,
-            type = BaseSimpleItem.TEACHER,
-            isActive = true
-        ),
-        SimpleVO(
-            id = 1,
-            type = BaseSimpleItem.POSITIVE,
-            name = "Поехать на море",
-            percent = "57%"
-        ),
-        SimpleVO(
-            id = 2,
-            type = BaseSimpleItem.NEGATIVE,
-            name = "Купить лодку",
-            percent = "75%"
-        ),
-        SimpleVO(
-            id = 3,
-            type = BaseSimpleItem.NEGATIVE,
-            name = "Зарегаться на баду",
-            percent = "88%"
-        ),
-        SimpleVO(
-            id = 4,
-            type = BaseSimpleItem.POSITIVE,
-            name = "Найти девушку",
-            percent = "63%"
-        ),
-        SimpleVO(
-            id = 5,
-            type = BaseSimpleItem.POSITIVE,
-            name = "Сходить в кино на Venom2",
-            percent = "70%"
-        ),
-    )
 
     override fun downloadData() {
         val newList: MutableList<BaseSimpleItem> = mutableListOf()
@@ -84,14 +53,36 @@ object SimpleRepositoryImpl : SimpleRepository, CreateSimpleRepository, AddInner
         return Completable.complete()
     }
 
-    override fun plus(solutionId: Long?, argumentLvl: Int): Completable {
+    override fun plus(solutionId: Long, argumentLvl: Int, name: String): Completable {
         updateSolutions(solutionId, argumentLvl, true)
+        insertDetailsSolution(solutionId, argumentLvl, name, true)
         downloadData()
         return Completable.complete()
     }
 
-    override fun minus(solutionId: Long?, argumentLvl: Int): Completable {
+    private fun insertDetailsSolution(solutionId: Long, argumentLvl: Int, name: String, isPositive: Boolean) {
+        val type = if (isPositive) BaseSimpleItem.DETAILS_POSITIVE else BaseSimpleItem.DETAILS_NEGATIVE
+        val vo = SimpleDetailsVO(
+            id = System.nanoTime(),
+            type = type,
+            name = name,
+            parentId = solutionId,
+            argumentLvl = argumentLvl,
+            argumentDescription = "description"
+        )
+
+        var list = mutableListOf<SimpleDetailsVO>()
+        listInnerSolution[solutionId]?.let {
+            list = it
+            list.add(vo)
+        } ?: list.add(vo)
+
+        listInnerSolution[solutionId] = list
+    }
+
+    override fun minus(solutionId: Long, argumentLvl: Int, name: String): Completable {
         updateSolutions(solutionId, argumentLvl, false)
+        insertDetailsSolution(solutionId, argumentLvl, name, false)
         downloadData()
         return Completable.complete()
     }
@@ -108,8 +99,6 @@ object SimpleRepositoryImpl : SimpleRepository, CreateSimpleRepository, AddInner
                     listSolution[changeIndex] = newVO
                 }
             }
-
-
     }
 
     private fun updateVO(positiveCount: Double, negativeCount: Double, vo: SimpleVO): SimpleVO {
@@ -146,4 +135,15 @@ object SimpleRepositoryImpl : SimpleRepository, CreateSimpleRepository, AddInner
         return "${percent.roundToInt()}%"
     }
 
+    override fun searchSolutionById(id: Long): Single<SimpleDetailsViewState> {
+        val allList = listInnerSolution[id]
+        val positiveList = allList?.filter { it.type == BaseSimpleItem.DETAILS_POSITIVE }
+        val negativeList = allList?.filter { it.type == BaseSimpleItem.DETAILS_NEGATIVE }
+        return Single.just(
+            SimpleDetailsViewState.SuccessLists(
+                positiveList = positiveList,
+                negativeList = negativeList
+            )
+        )
+    }
 }

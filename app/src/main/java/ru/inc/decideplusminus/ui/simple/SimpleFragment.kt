@@ -15,7 +15,6 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
     //TODO подрубить tooltip для обучения пользователя
 
     lateinit var viewModel: SimpleViewModel
-
     private var adapter: SimpleAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +40,7 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
     }
 
     private fun initRecyclerView() {
-        val listeners = object : SimpleAdapterListeners {
+        val listeners = object : SimpleAdapterListener.SimpleListener {
             override fun clickAddArgument(): (SimpleVO) -> Unit = {
                 // TODO передавать еще имя кликнутого решения
                 SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddInnerSolution(it.id).let { action ->
@@ -51,6 +50,7 @@ class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding
 
             override fun clickOpenDetailsArguments(): (SimpleVO) -> Unit = {
                 SimpleFragmentDirections.actionNavigationHomeToSimpleSolutionFragment(it.name).let { action ->
+                    action.parentId = it.id
                     findNavController().navigate(action)
                 }
             }

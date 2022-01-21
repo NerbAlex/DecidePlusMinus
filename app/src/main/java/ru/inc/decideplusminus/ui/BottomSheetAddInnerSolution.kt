@@ -10,8 +10,6 @@ import ru.inc.decideplusminus.databinding.FragmentBottomSheetAddInnerSolutionBin
 import ru.inc.decideplusminus.ui.base.BaseBottomSheetFragment
 import ru.inc.decideplusminus.view_model.simple.AddInnerSimpleViewModel
 import ru.inc.decideplusminus.view_model.simple.AddInnerSimpleViewState
-import ru.inc.decideplusminus.view_model.simple.CreateSimpleViewModel
-import ru.inc.decideplusminus.view_model.simple.CreateSimpleViewState
 
 class BottomSheetAddInnerSolution :
     BaseBottomSheetFragment<FragmentBottomSheetAddInnerSolutionBinding>(FragmentBottomSheetAddInnerSolutionBinding::inflate) {
@@ -62,11 +60,11 @@ class BottomSheetAddInnerSolution :
         }
 
         binding.minus.setOnClickListener {
-            viewModel.minus(solutionId, argumentLvl)
+            viewModel.minus(solutionId, argumentLvl, binding.editText.text.toString().trim())
         }
 
         binding.plus.setOnClickListener {
-            viewModel.plus(solutionId, argumentLvl)
+            viewModel.plus(solutionId, argumentLvl, binding.editText.text.toString().trim())
         }
     }
 
@@ -78,7 +76,7 @@ class BottomSheetAddInnerSolution :
         viewModel = ViewModelProvider(this).get(AddInnerSimpleViewModel::class.java)
         viewModel.getData().observe(viewLifecycleOwner) { state ->
             when (state) {
-                AddInnerSimpleViewState.completedAdd -> findNavController().popBackStack()
+                AddInnerSimpleViewState.CompletedAdd -> findNavController().popBackStack()
             }
         }
     }

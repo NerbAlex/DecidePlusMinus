@@ -6,7 +6,7 @@ import ru.inc.decideplusminus.ui.base.BaseViewHolder
 
 class SimpleNeutralVH(
     private val view: ItemSimpleNeutraleVhBinding,
-    private val listeners: SimpleAdapterListeners
+    private val listeners: SimpleAdapterListener.SimpleListener
 ) :
     BaseViewHolder<BaseSimpleItem>(view) {
     override fun bind(model: BaseSimpleItem) {
