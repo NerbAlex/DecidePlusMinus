@@ -1,15 +1,17 @@
 package ru.inc.decideplusminus.view_model.simple
 
+import ru.inc.decideplusminus.model.repositories.SimpleRepositoryImpl
 import ru.inc.decideplusminus.ui.base.BaseViewModel
-import javax.inject.Inject
 
-class SimpleViewModel @Inject constructor(private val repository: SolutionRepository<SimpleViewState>) :
-    BaseViewModel<SimpleViewState>() {
+class SimpleViewModel : BaseViewModel<SimpleViewState, SimpleRepository>(SimpleRepositoryImpl) {
 
-
-    fun start() {
-        compositeDisposable.add(repository.downloadData().subscribe({
-            mutableLiveData.postValue(it)
+    init {
+        compositeDisposable.add(repository.simplePS.subscribe({ state ->
+            mutableLiveData.postValue(state)
         }, {}))
+    }
+
+    fun downloadData() {
+        repository.downloadData()
     }
 }

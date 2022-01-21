@@ -14,5 +14,11 @@
     <color name="error">#FC869E</color>
     <color name="error_light">#FFE3E8</color>
 
+    <color name="red">#AE4F62</color>
+
+    <color name="neutral_light">#ADE3FB</color>
+    <color name="neutral">#54C6FA</color>
+
+
 
 </resources>

@@ -1,21 +1,26 @@
 package ru.inc.decideplusminus.ui.simple
 
+import ru.inc.decideplusminus.databinding.ItemSimpleNeutraleVhBinding
 import ru.inc.decideplusminus.databinding.ItemSimplePositiveVhBinding
 import ru.inc.decideplusminus.ui.base.BaseViewHolder
 
-class SimpleSolutionPositiveVH(
-    private val view: ItemSimplePositiveVhBinding,
-    private val listeners: SimpleAdapterListeners
+class SimpleNeutralVH(
+    private val view: ItemSimpleNeutraleVhBinding,
+    private val listeners: SimpleAdapterListener.SimpleListener
 ) :
     BaseViewHolder<BaseSimpleItem>(view) {
     override fun bind(model: BaseSimpleItem) {
         val simpleSolutionModel = model as SimpleVO
 
         view.nameSolutionTv.text = simpleSolutionModel.name
-        view.percentTv.text = simpleSolutionModel.percent
+        view.percent.text = simpleSolutionModel.percent
 
-        view.root.setOnClickListener {
+        view.openSolutionBtn.setOnClickListener {
             listeners.clickOpenDetailsArguments().invoke(simpleSolutionModel)
+        }
+
+        view.addArgumentBtn.setOnClickListener {
+            listeners.clickAddArgument().invoke(simpleSolutionModel)
         }
     }
 }

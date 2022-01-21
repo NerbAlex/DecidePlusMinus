@@ -6,47 +6,53 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
-import ru.inc.decideplusminus.ui.MyApp
 import ru.inc.decideplusminus.ui.base.BaseFragment
 import ru.inc.decideplusminus.view_model.simple.SimpleViewModel
 import ru.inc.decideplusminus.view_model.simple.SimpleViewState
-import javax.inject.Inject
 
 class SimpleFragment : BaseFragment<FragmentSimpleBinding>(FragmentSimpleBinding::inflate) {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: SimpleViewModel by lazy { viewModel() }
+    //TODO подрубить tooltip для обучения пользователя
 
+    lateinit var viewModel: SimpleViewModel
     private var adapter: SimpleAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        observeData()
+        initViewModel()
+        initListeners()
     }
 
-    private fun observeData() {
-        MyApp.instance.appComponent.inject(this)
+    private fun initListeners() {
+        //TODO если голосовое управление, показывать всплывающую подсказку в начале списка
+        binding.createNewSolution.setOnClickListener {
+            SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddSimpleSolution().let { action ->
+                findNavController().navigate(action)
+            }
+        }
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(SimpleViewModel::class.java)
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
-        viewModel.start()
+        viewModel.downloadData()
     }
-
-    private fun viewModel() = ViewModelProvider(this, viewModelFactory).get(SimpleViewModel::class.java)
 
     private fun initRecyclerView() {
-        val listeners = object : SimpleAdapterListeners {
+        val listeners = object : SimpleAdapterListener.SimpleListener {
             override fun clickAddArgument(): (SimpleVO) -> Unit = {
-                //TODO вызываем шторку с добавление аргумента
+                // TODO передавать еще имя кликнутого решения
+                SimpleFragmentDirections.actionNavigationHomeToBottomSheetAddInnerSolution(it.id).let { action ->
+                    findNavController().navigate(action)
+                }
             }
 
             override fun clickOpenDetailsArguments(): (SimpleVO) -> Unit = {
                 SimpleFragmentDirections.actionNavigationHomeToSimpleSolutionFragment(it.name).let { action ->
+                    action.parentId = it.id
                     findNavController().navigate(action)
                 }
-
-                //TODO переходим на страницу создания аргумента(можно здесь дернуть паблишсабджект, а в другом фрагменте получить,
-                //таким образом данные будут собираться в одном потоке, а создание фрагмента в другом параллельно - оптимизация )
             }
         }
 

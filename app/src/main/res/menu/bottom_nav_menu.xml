@@ -6,10 +6,10 @@
         android:icon="@drawable/one_buble"
         android:title="@string/simple_bottom_menu" />
 
-    <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/many_buble"
-        android:title="@string/complex_bottom_menu" />
+<!--    <item-->
+<!--        android:id="@+id/navigation_dashboard"-->
+<!--        android:icon="@drawable/many_buble"-->
+<!--        android:title="@string/complex_bottom_menu" />-->
 
     <item
         android:id="@+id/navigation_notifications"
