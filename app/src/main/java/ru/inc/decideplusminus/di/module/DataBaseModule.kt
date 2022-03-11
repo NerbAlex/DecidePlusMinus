@@ -3,10 +3,10 @@ package ru.inc.decideplusminus.di.module
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import ru.inc.decideplusminus.model.data.cache.SimpleCache
-import ru.inc.decideplusminus.model.database.SolutionDataBase
-import ru.inc.decideplusminus.model.repositories.SimpleLocalDataSource
-import ru.inc.decideplusminus.ui.MyApp
+import ru.inc.decideplusminus.data.cache.SimpleCache
+import ru.inc.decideplusminus.frameworks.database.SolutionDataBase
+import ru.inc.decideplusminus.data.repositories.SimpleLocalDataSource
+import ru.inc.decideplusminus.presentation.ui.MyApp
 import javax.inject.Singleton
 
 @Module
