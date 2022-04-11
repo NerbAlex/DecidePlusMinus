@@ -16,13 +16,18 @@ private const val BLOCK_OBJECT_NAME = "Unit"
  *
  * Найти в логере по info и ключу "benchmark"
  */
-internal fun <T> bench(logName: String = "", block: () -> T) {
-    val result: String
+internal fun <T> bench(logName: String = "", block: () -> T): T {
+    val result: T
     val blockTime = measureTimeMillis {
-        result = block.invoke().toString()
+        result = block.invoke()
     }
 
-    val objectResultName = if (result == BLOCK_OBJECT) BLOCK_OBJECT_NAME else result
+    val objectResultName = if (result == BLOCK_OBJECT) BLOCK_OBJECT_NAME else result.toString()
 
-    Timber.i("benchmark $logName: [object: $objectResultName, time: $blockTime m.sec]")
+    Timber.i(
+        "benchmark $logName: [object: $objectResultName, time: $blockTime m.sec, Thread: ${
+            Thread.currentThread().name
+        }]"
+    )
+    return result
 }

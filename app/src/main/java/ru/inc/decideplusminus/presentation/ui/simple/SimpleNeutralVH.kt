@@ -1,6 +1,7 @@
 package ru.inc.decideplusminus.presentation.ui.simple
 
 import ru.inc.decideplusminus.databinding.ItemSimpleNeutraleVhBinding
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseViewHolder
 
 class SimpleNeutralVH(

@@ -3,6 +3,7 @@ package ru.inc.decideplusminus.utils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import ru.inc.decideplusminus.databinding.*
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseViewHolder
 import ru.inc.decideplusminus.presentation.ui.simple.teachers.TeacherVH
 import ru.inc.decideplusminus.presentation.ui.simple.*

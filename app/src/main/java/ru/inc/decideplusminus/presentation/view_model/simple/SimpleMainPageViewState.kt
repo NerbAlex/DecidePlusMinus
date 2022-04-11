@@ -1,6 +1,6 @@
 package ru.inc.decideplusminus.presentation.view_model.simple
 
-import ru.inc.decideplusminus.presentation.ui.simple.BaseSimpleItem
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 
 sealed class SimpleMainPageViewState {
 

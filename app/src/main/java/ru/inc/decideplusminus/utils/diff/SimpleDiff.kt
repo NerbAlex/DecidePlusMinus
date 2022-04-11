@@ -2,7 +2,7 @@ package ru.inc.decideplusminus.utils.diff
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
-import ru.inc.decideplusminus.presentation.ui.simple.BaseSimpleItem
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleVO
 
 class SimpleDiff: DiffUtil.ItemCallback<BaseSimpleItem>() {

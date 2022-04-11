@@ -1,7 +1,7 @@
 package ru.inc.decideplusminus.domain.interactor
 
 import io.reactivex.rxjava3.core.Completable
-import ru.inc.decideplusminus.presentation.ui.simple.BaseSimpleItem
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleVO
 import ru.inc.decideplusminus.presentation.view_model.simple.create_simple.CreateSolutionUseCase
 import javax.inject.Inject
