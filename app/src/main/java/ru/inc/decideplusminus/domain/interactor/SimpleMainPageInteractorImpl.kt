@@ -16,7 +16,9 @@ class SimpleMainPageInteractorImpl @Inject constructor(
 ): SimpleMainPageInteractor {
 
     override fun getData(): Single<List<BaseSimpleItem>> {
-        return bench("interactor") { repository.getSimpleSolutions()}
+        return bench("interactor") {
+            repository.getSimpleSolutions()
+        }
     }
 
     // 1. чекаем ViewObjectStorage, если там нет, собираем список VO, если есть, отдаем во вьюмодель

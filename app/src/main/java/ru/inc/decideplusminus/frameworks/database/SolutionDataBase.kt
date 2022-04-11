@@ -13,7 +13,7 @@ import ru.inc.decideplusminus.data.models.dto.SimpleEntity
 abstract class SolutionDataBase : RoomDatabase() {
 
     companion object {
-        const val NAME = "database_decide_1"
+        const val NAME = "database_decide_2"
     }
 
     abstract fun decideDao(): SolutionDao

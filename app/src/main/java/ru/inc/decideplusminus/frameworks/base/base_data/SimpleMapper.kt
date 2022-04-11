@@ -37,7 +37,6 @@ abstract class SimpleMapper {
     protected fun Single<List<SimpleEntity>>.toSimpleVoList(): Single<List<BaseSimpleItem>> =
         flatMap {
             bench("mapper") {
-                Thread.sleep(1000)
                 Single.just(it.toVoList())
             }
         }

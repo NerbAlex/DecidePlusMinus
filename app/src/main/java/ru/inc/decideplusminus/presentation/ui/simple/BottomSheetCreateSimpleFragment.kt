@@ -2,11 +2,10 @@ package ru.inc.decideplusminus.presentation.ui.simple
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.inc.decideplusminus.databinding.FragmentBottomSheetCreateSolutionBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseBottomSheetFragment
-import ru.inc.decideplusminus.presentation.ui.MyApp
+import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.presentation.view_model.simple.create_simple.CreateSimpleVM
 import ru.inc.decideplusminus.presentation.view_model.simple.create_simple.CreateSimpleViewState
 
@@ -16,11 +15,6 @@ class BottomSheetCreateSimpleFragment :
     ) {
 
     private var viewModel: CreateSimpleVM? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        MyApp.instance.appComponent.inject(this)
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +33,10 @@ class BottomSheetCreateSimpleFragment :
 
     override fun renderState(state: CreateSimpleViewState) {
         when (state) {
-            CreateSimpleViewState.Created -> findNavController().popBackStack()
+            CreateSimpleViewState.Created -> {
+                findNavController().popBackStack()
+                sendEvent(UiEvent.ReloadMainPage)
+            }
         }
     }
 }

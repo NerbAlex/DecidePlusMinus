@@ -6,6 +6,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleDetailsBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseFragment
+import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleAdapter
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleAdapterListener
 import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewState

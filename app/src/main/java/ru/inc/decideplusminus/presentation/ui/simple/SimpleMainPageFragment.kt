@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseFragment
+import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewModel
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewState
 
@@ -14,13 +15,37 @@ class SimpleMainPageFragment :
 
     //TODO подрубить tooltip для обучения пользователя
 
+    // TODO список должен пружинить, что бы не мешал FAB и можно было прочитать нижний item
+
+    // TODO при добавлении в список нового итема, он должен скролится к последнему
+
     private var adapter: SimpleAdapter? = null
+    private var viewModel: SimpleMainPageViewModel? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        initViewModel<SimpleMainPageViewModel>()
+        viewModel = initViewModel()
         initListeners()
+
+        viewModel?.downloadData()
+        eventHandler {
+            if (it is UiEvent.ReloadMainPage) viewModel?.downloadData()
+        }
+    }
+
+    override fun renderState(state: SimpleMainPageViewState) {
+        when (state) {
+            is SimpleMainPageViewState.Success -> {
+                adapter?.submitList(state.list)
+                updateView { recycler.scrollToPosition(state.list.size - 1) }  // TODO настроить
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter = null
     }
 
     private fun initListeners() {
@@ -54,18 +79,5 @@ class SimpleMainPageFragment :
         binding.recycler.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recycler.setHasFixedSize(true)
         binding.recycler.adapter = adapter
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        adapter = null
-    }
-
-    override fun renderState(state: SimpleMainPageViewState) {
-        when (state) {
-            is SimpleMainPageViewState.Success -> {
-                adapter?.submitList(state.list)
-            }
-        }
     }
 }

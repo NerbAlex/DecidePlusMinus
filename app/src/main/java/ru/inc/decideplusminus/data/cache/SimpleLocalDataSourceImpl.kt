@@ -15,7 +15,9 @@ class SimpleLocalDataSourceImpl @Inject constructor(private val db: SolutionData
     SimpleLocalDataSource {
 
     override fun getAll(): Single<List<BaseSimpleItem>> =
-        bench("dataSource") { db.decideDao().getAll().toSimpleVoList().subscribeOn(Schedulers.io()) }  // TODO проверить в каком потоке мапится simpleVoList и если подписываться во вьюмодели
+        bench("dataSource") {
+            db.decideDao().getAll().toSimpleVoList().subscribeOn(Schedulers.io())
+        }  // TODO проверить в каком потоке мапится simpleVoList и если подписываться во вьюмодели
 
 
     override fun updateData(baseSimpleItem: BaseSimpleItem): Completable {
@@ -23,6 +25,6 @@ class SimpleLocalDataSourceImpl @Inject constructor(private val db: SolutionData
     }
 
     override fun create(simpleSolution: SimpleVO): Completable {
-        return db.decideDao().insert(simpleSolution.toEntity())
+        return db.decideDao().insert(simpleSolution.toEntity()).subscribeOn(Schedulers.io())
     }
 }

@@ -20,10 +20,8 @@ class SimpleRepositoryImpl @Inject constructor(
 
     //TODO Создать Use Cases и разгрузить репозиторий, вся логика в юскейсах, реп только решает куда идти за данными(runtime, db, remote)
 
-    override val simpleMainPagePS: PublishSubject<SimpleMainPageViewState> = PublishSubject.create() // TODO похоже он нужен для интерактора или лучше при сохранении возвращать гготовый список
-
-    override fun getSimpleSolutions(): Single<List<BaseSimpleItem>> {
-        return bench("Repository") { localDataSource.getAll()  }
+    override fun getSimpleSolutions(): Single<List<BaseSimpleItem>> = bench("Repository") {
+        localDataSource.getAll()
     }
 
     override fun getSimpleSolution(id: Long): Single<BaseSimpleItem> {
@@ -48,28 +46,11 @@ class SimpleRepositoryImpl @Inject constructor(
         return Completable.complete()// TODO
     }
 
-    init {
-//        downloadData()
-    }
-
     private val listInnerSolution = mutableMapOf<Long, MutableList<SimpleDetailsVO>>()
     private val listSolution = mutableListOf<BaseSimpleItem>()
 
-    /**
-     * дергается только в этом классе, например: при инициализации репозитория или когда надо обновить стейт SimpleMainPage
-     */
-    private fun downloadData() {
-        val newList: MutableList<BaseSimpleItem> = mutableListOf()
-        newList.addAll(listSolution)
-        simpleMainPagePS.onNext(SimpleMainPageViewState.Success(newList))
-    }
-
-    // TODO в useCase
-    override fun createSimpleSolution(simpleSolution: SimpleVO): Completable {
-        listSolution.add(simpleSolution)
-        downloadData()
+    override fun createSimpleSolution(simpleSolution: SimpleVO): Completable = bench("create") {
         localDataSource.create(simpleSolution)
-        return Completable.complete()
     }
 
     fun searchDetailsSolutionsById(id: Long): Single<SimpleDetailsViewState> {

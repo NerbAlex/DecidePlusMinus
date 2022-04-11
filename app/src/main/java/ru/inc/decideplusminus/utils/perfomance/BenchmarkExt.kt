@@ -18,9 +18,7 @@ private const val BLOCK_OBJECT_NAME = "Unit"
  */
 internal fun <T> bench(logName: String = "", block: () -> T): T {
     val result: T
-    val blockTime = measureTimeMillis {
-        result = block.invoke()
-    }
+    val blockTime = measureTimeMillis { result = block.invoke() }
 
     val objectResultName = if (result == BLOCK_OBJECT) BLOCK_OBJECT_NAME else result.toString()
 

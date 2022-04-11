@@ -9,7 +9,6 @@ import ru.inc.decideplusminus.presentation.ui.simple.details.SimpleDetailsVO
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewState
 
 interface SimpleRepository {
-    val simpleMainPagePS: PublishSubject<SimpleMainPageViewState>
 
     fun getSimpleSolutions(): Single<List<BaseSimpleItem>>
     fun getSimpleSolution(id: Long): Single<BaseSimpleItem>
