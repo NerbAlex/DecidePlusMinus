@@ -9,18 +9,13 @@ import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseBottomSheetF
 import ru.inc.decideplusminus.presentation.ui.MyApp
 import ru.inc.decideplusminus.presentation.view_model.simple.create_simple.CreateSimpleVM
 import ru.inc.decideplusminus.presentation.view_model.simple.create_simple.CreateSimpleViewState
-import ru.inc.decideplusminus.utils.viewModel
-import javax.inject.Inject
 
 class BottomSheetCreateSimpleFragment :
-    BaseBottomSheetFragment<FragmentBottomSheetCreateSolutionBinding>(
+    BaseBottomSheetFragment<FragmentBottomSheetCreateSolutionBinding, CreateSimpleViewState>(
         FragmentBottomSheetCreateSolutionBinding::inflate
     ) {
 
-    @Inject
-    lateinit var viewModelProvider: ViewModelProvider.Factory
-
-    private lateinit var viewModel: CreateSimpleVM
+    private var viewModel: CreateSimpleVM? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         MyApp.instance.appComponent.inject(this)
@@ -30,7 +25,7 @@ class BottomSheetCreateSimpleFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViewModel()
+        viewModel = initViewModel()
 
         // TODO При дизайне закруглить диалог
 
@@ -38,16 +33,13 @@ class BottomSheetCreateSimpleFragment :
 
         binding.createSolution.setOnClickListener {
             val name = binding.editText.text.toString()
-            viewModel.createSolution(name)
+            viewModel?.createSolution(name)
         }
     }
 
-    private fun initViewModel() {
-        viewModel = viewModel(viewModelProvider)
-        viewModel.getData().observe(viewLifecycleOwner) { state ->
-            when (state) {
-                CreateSimpleViewState.Created -> findNavController().popBackStack()
-            }
+    override fun renderState(state: CreateSimpleViewState) {
+        when (state) {
+            CreateSimpleViewState.Created -> findNavController().popBackStack()
         }
     }
 }

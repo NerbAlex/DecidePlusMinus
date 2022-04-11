@@ -1,6 +1,6 @@
 package ru.inc.decideplusminus.presentation.ui.simple.teachers
 
-import ru.inc.decideplusminus.presentation.ui.simple.BaseSimpleItem
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 
 /**
  * Модель кнопки обучения

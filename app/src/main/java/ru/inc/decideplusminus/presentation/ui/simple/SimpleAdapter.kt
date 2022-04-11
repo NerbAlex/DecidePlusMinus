@@ -2,6 +2,7 @@ package ru.inc.decideplusminus.presentation.ui.simple
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseViewHolder
 import ru.inc.decideplusminus.utils.ViewHoldersFactory
 import ru.inc.decideplusminus.utils.diff.SimpleDiff

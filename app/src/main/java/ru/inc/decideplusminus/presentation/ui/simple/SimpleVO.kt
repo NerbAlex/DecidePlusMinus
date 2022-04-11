@@ -1,5 +1,7 @@
 package ru.inc.decideplusminus.presentation.ui.simple
 
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
+
 /**
  * Модель простого решения в главном списке
  *

@@ -4,9 +4,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class SimpleSolutionEntity(
+data class SimpleEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+    val type: Int,
     val name: String,
-    val importance: Int
+    val percent: String,
+    val positiveCount: Int,
+    val negativeCount: Int
 )

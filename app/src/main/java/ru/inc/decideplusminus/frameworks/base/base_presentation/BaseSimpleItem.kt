@@ -1,4 +1,4 @@
-package ru.inc.decideplusminus.presentation.ui.simple
+package ru.inc.decideplusminus.frameworks.base.base_presentation
 
 abstract class BaseSimpleItem {
     //TODO оставить, в будущем здесь появятся другие виджеты

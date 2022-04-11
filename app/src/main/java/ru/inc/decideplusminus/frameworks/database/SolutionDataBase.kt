@@ -2,11 +2,11 @@ package ru.inc.decideplusminus.frameworks.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import ru.inc.decideplusminus.data.models.dto.SimpleSolutionEntity
+import ru.inc.decideplusminus.data.models.dto.SimpleEntity
 
 @Database(
     entities = [
-        SimpleSolutionEntity::class
+        SimpleEntity::class
     ],
     version = 1, exportSchema = true
 )

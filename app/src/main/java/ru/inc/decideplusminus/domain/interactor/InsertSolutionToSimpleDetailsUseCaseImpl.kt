@@ -1,7 +1,7 @@
 package ru.inc.decideplusminus.domain.interactor
 
 import io.reactivex.rxjava3.core.Completable
-import ru.inc.decideplusminus.presentation.ui.simple.BaseSimpleItem
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleVO
 import ru.inc.decideplusminus.presentation.ui.simple.details.SimpleDetailsVO
 import ru.inc.decideplusminus.presentation.view_model.simple.insert_to_simple.InsertSolutionUseCase
@@ -16,7 +16,7 @@ class InsertSolutionToSimpleDetailsUseCaseImpl @Inject constructor(
     override fun plus(solutionId: Long, argumentLvl: Int, name: String): Completable {
         return repository.getSimpleSolution(solutionId).flatMapCompletable { simpleVO ->
             // TODO прочекать на каких потоках все исполняется и добавить поток(и)
-            return@flatMapCompletable updateSimpleVO(simpleVO, argumentLvl, true)
+            return@flatMapCompletable updateSimpleVO(simpleVO as SimpleVO, argumentLvl, true)
                 .andThen(insertDetailSolution(solutionId, argumentLvl, name, true))
         }
     }
@@ -49,7 +49,7 @@ class InsertSolutionToSimpleDetailsUseCaseImpl @Inject constructor(
     override fun minus(solutionId: Long, argumentLvl: Int, name: String): Completable {
         return repository.getSimpleSolution(solutionId).flatMapCompletable { simpleVO ->
 
-            return@flatMapCompletable updateSimpleVO(simpleVO, argumentLvl, false)
+            return@flatMapCompletable updateSimpleVO(simpleVO as SimpleVO, argumentLvl, false)
                 .andThen(insertDetailSolution(solutionId, argumentLvl, name, false))
         }
     }

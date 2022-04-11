@@ -2,27 +2,20 @@ package ru.inc.decideplusminus.presentation.ui.simple.details
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleDetailsBinding
-import ru.inc.decideplusminus.di.factory.ViewModelFactory
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseFragment
-import ru.inc.decideplusminus.presentation.ui.MyApp
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleAdapter
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleAdapterListener
 import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewState
 import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewModel
-import ru.inc.decideplusminus.utils.viewModel
-import javax.inject.Inject
 
 class SimpleDetailsFragment :
     BaseFragment<FragmentSimpleDetailsBinding, SimpleDetailsViewState>(FragmentSimpleDetailsBinding::inflate) {
 
     private val navArgs: SimpleDetailsFragmentArgs by navArgs()
-    private var viewModel: SimpleDetailsViewModel? = null
+    private val viewModel: SimpleDetailsViewModel by lazy { initViewModel() }
     private var adapterPositive: SimpleAdapter? = null
     private var adapterNegative: SimpleAdapter? = null
 
@@ -31,14 +24,13 @@ class SimpleDetailsFragment :
         initRecyclerViews()
 
         val id = navArgs.parentId
-        viewModel = initViewModel()
-        viewModel?.searchById(id)
+        viewModel.searchById(id)
     }
 
     private fun listener(): SimpleAdapterListener.SimpleDetailsListener =
         object : SimpleAdapterListener.SimpleDetailsListener {
             override fun click(): (SimpleDetailsVO) -> Unit = {
-
+                // TODO поменять это на красивые лямбды с сылками на метод
             }
         }
 

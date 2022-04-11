@@ -2,7 +2,7 @@ package ru.inc.decideplusminus.presentation.view_model.simple
 
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.subjects.PublishSubject
-import ru.inc.decideplusminus.presentation.ui.simple.BaseSimpleItem
+import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 
 interface SimpleMainPageRepository{
 

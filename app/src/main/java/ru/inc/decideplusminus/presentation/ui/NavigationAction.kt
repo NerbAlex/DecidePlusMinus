@@ -5,7 +5,7 @@ package ru.inc.decideplusminus.presentation.ui
  *
  * @property SIMPLE_SOLUTION - Запуск из [SimpleFragment]
  */
-class NavigationAction {
+class NavigationAction { // TODO использовать силд классы
     companion object {
         const val SIMPLE_SOLUTION = 1
     }
