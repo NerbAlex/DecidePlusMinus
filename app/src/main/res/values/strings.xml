@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Принять решение</string>
+    <string name="simple_bottom_menu">Задачи</string>
+    <string name="complex_bottom_menu">Сложные</string>
+    <string name="settings_bottom_menu">Настройки</string>
+    <string name="simple_toolbar">Принять решение</string>
+    <string name="complex_toolbar">Многозначные решения</string>
+    <string name="settings_toolbar">Настройки и Премиум</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="ru.inc.decideplusminus.presentation.ui.simple.SimpleMainPageFragment"
+        android:label="@string/simple_toolbar"
+        tools:layout="@layout/fragment_simple" >
+        <action
+            android:id="@+id/action_to_simpleDetails"
+            app:destination="@id/SimpleDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_to_bottomSheetInsertSolutionToSimpleDetails"
+            app:destination="@id/bottomSheetInsertSimpleToSimpleDetails" />
+        <action
+            android:id="@+id/action_to_bottomSheetCreateSimple"
+            app:destination="@id/bottomSheetCreateSimple" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="ru.inc.decideplusminus.presentation.ui.settings.SettingsFragment"
+        android:label="@string/settings_toolbar"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/SimpleDetailsFragment"
+        android:name="ru.inc.decideplusminus.presentation.ui.simple.details.SimpleDetailsFragment"
+        android:label="{toolbarName}"
+        tools:layout="@layout/fragment_simple_details" >
+        <argument
+            android:name="toolbarName"
+            app:argType="string" />
+        <argument
+            android:name="parentId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+    <dialog
+        android:id="@+id/bottomSheetInsertSimpleToSimpleDetails"
+        android:name="ru.inc.decideplusminus.presentation.ui.BottomSheetInsertSolutionToSimpleDetailsFragment"
+        android:label="BottomSheetAddSolution">
+        <argument
+            android:name="solutionId"
+            app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/bottomSheetCreateSimple"
+        android:name="ru.inc.decideplusminus.presentation.ui.simple.BottomSheetCreateSimpleFragment"
+        android:label="BottomSheetAddSimpleSolution" />
+</navigation>
