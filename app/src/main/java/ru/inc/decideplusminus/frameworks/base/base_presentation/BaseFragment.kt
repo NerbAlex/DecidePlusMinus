@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
+import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.utils.viewModel
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
@@ -24,11 +25,23 @@ abstract class BaseFragment<Binding : ViewBinding, State>(private val inflate: I
 
     abstract fun renderState(state: State)
 
+    protected fun eventHandler(event: (UiEvent) -> Unit) {
+        with(uiEvents) {
+            this@BaseFragment.requireContext().subscribeUiEvents { event.invoke(it) }
+        }
+    }
+
     protected fun updateView(block: Binding.() -> Unit) = block.invoke(binding)
 
     protected inline fun <reified VM : BaseViewModel<State>> initViewModel(): VM {
         val viewModel = viewModel<VM>(viewModelFactory)
         viewModel.getData().observe(viewLifecycleOwner, ::renderState)
         return viewModel
+    }
+
+    protected fun sendEvent(event: UiEvent) {
+        with(uiEvents) {
+            this@BaseFragment.requireContext().sendEvent(event)
+        }
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.utils.viewModel
 
 abstract class BaseBottomSheetFragment<Binding : ViewBinding, State>(private val inflate: Inflate<Binding>) :
@@ -31,5 +32,11 @@ abstract class BaseBottomSheetFragment<Binding : ViewBinding, State>(private val
         val viewModel = viewModel<VM>(viewModelFactory)
         viewModel.getData().observe(viewLifecycleOwner, ::renderState)
         return viewModel
+    }
+
+    protected fun sendEvent(event: UiEvent) {
+        with(uiEvents) {
+            this@BaseBottomSheetFragment.requireContext().sendEvent(event)
+        }
     }
 }

@@ -8,7 +8,7 @@ class SimpleMainPageViewModel @Inject constructor(
     private val simpleMainPageInteractor: SimpleMainPageInteractor
 ) : BaseViewModel<SimpleMainPageViewState>() {
 
-    init {
+    fun downloadData() {
         bench("viewModel init") {
             simpleMainPageInteractor.getData().subscribe({ listSimpleVo ->
                 bench("viewModel success") {

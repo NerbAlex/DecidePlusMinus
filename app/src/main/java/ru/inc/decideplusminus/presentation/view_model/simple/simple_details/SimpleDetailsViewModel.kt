@@ -9,8 +9,8 @@ class SimpleDetailsViewModel @Inject constructor(
 ): BaseViewModel<SimpleDetailsViewState>() {
 
     fun searchById(id: Long) {
-        compositeDisposable.add(repository.getSimpleDetailsSolutions(id).subscribe({  // TODO в useCase
-            mutableLiveData.postValue(SimpleDetailsViewState.SuccessLists(it, it)) // TODO пришел готовый стейт
+        compositeDisposable.add(repository.getSimpleDetailsSolutions(id).subscribe({
+            mutableLiveData.postValue(it)
         }, {}))
     }
 }

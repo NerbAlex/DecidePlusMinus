@@ -34,14 +34,18 @@ class SimpleDetailsFragment :
             }
         }
 
+    private fun bindLastItem(lastPosition: Int) {
+
+    }
+
     private fun initRecyclerViews() {
-        adapterPositive = SimpleAdapter(listener())
+        adapterPositive = SimpleAdapter(listener(), ::bindLastItem)
         binding.recyclerPositive.layoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerPositive.setHasFixedSize(true)
         binding.recyclerPositive.adapter = adapterPositive
 
-        adapterNegative = SimpleAdapter(listener())
+        adapterNegative = SimpleAdapter(listener(), ::bindLastItem)
         binding.recyclerNegative.layoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerNegative.setHasFixedSize(true)
