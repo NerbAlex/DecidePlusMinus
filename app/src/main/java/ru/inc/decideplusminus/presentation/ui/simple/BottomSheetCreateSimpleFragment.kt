@@ -35,8 +35,12 @@ class BottomSheetCreateSimpleFragment :
         when (state) {
             CreateSimpleViewState.Created -> {
                 findNavController().popBackStack()
-                sendEvent(UiEvent.ReloadMainPage)
             }
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        sendEvent(UiEvent.ReloadMainPage)
     }
 }

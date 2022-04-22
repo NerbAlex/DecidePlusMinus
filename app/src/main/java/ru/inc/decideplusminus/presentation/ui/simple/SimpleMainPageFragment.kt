@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseFragment
 import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewModel
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewState
+import ru.inc.decideplusminus.utils.extensions.scrollOrSmoothScrollToPosition
 
 class SimpleMainPageFragment :
     BaseFragment<FragmentSimpleBinding, SimpleMainPageViewState>(FragmentSimpleBinding::inflate) {
@@ -34,11 +36,24 @@ class SimpleMainPageFragment :
         }
     }
 
+    private fun bindLastItem(lastPosition: Int) {
+        updateView {
+            recycler.stopScroll()
+            adapter?.let {
+                recycler.scrollOrSmoothScrollToPosition(lastPosition)
+            }
+        }
+    }
+
     override fun renderState(state: SimpleMainPageViewState) {
         when (state) {
             is SimpleMainPageViewState.Success -> {
-                adapter?.submitList(state.list)
-                updateView { recycler.scrollToPosition(state.list.size - 1) }  // TODO настроить
+                adapter?.submitList(state.list) {
+                    if (state.list.isEmpty()) return@submitList
+                    bindLastItem(state.list.lastIndex)
+                }
+                // TODO сделать листенер на последний забинденный item
+//                Thread.sleep(1000)
             }
         }
     }
@@ -75,7 +90,7 @@ class SimpleMainPageFragment :
             }
         }
 
-        adapter = SimpleAdapter(listeners)
+        adapter = SimpleAdapter(listeners, ::bindLastItem)
         binding.recycler.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recycler.setHasFixedSize(true)
         binding.recycler.adapter = adapter

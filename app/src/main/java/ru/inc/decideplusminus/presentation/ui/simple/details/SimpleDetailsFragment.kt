@@ -6,7 +6,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.inc.decideplusminus.databinding.FragmentSimpleDetailsBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseFragment
-import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleAdapter
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleAdapterListener
 import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewState
@@ -35,14 +34,18 @@ class SimpleDetailsFragment :
             }
         }
 
+    private fun bindLastItem(lastPosition: Int) {
+
+    }
+
     private fun initRecyclerViews() {
-        adapterPositive = SimpleAdapter(listener())
+        adapterPositive = SimpleAdapter(listener(), ::bindLastItem)
         binding.recyclerPositive.layoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerPositive.setHasFixedSize(true)
         binding.recyclerPositive.adapter = adapterPositive
 
-        adapterNegative = SimpleAdapter(listener())
+        adapterNegative = SimpleAdapter(listener(), ::bindLastItem)
         binding.recyclerNegative.layoutManager =
             LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerNegative.setHasFixedSize(true)

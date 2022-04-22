@@ -1,7 +1,7 @@
 package ru.inc.decideplusminus.frameworks.base.base_data
 
 import io.reactivex.rxjava3.core.Single
-import ru.inc.decideplusminus.data.models.dto.SimpleEntity
+import ru.inc.decideplusminus.data.models.entities.SimpleEntity
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleVO
 import ru.inc.decideplusminus.utils.perfomance.bench

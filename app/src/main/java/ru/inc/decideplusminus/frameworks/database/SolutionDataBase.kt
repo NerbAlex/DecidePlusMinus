@@ -2,18 +2,20 @@ package ru.inc.decideplusminus.frameworks.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import ru.inc.decideplusminus.data.models.dto.SimpleEntity
+import ru.inc.decideplusminus.data.models.entities.DetailsEntity
+import ru.inc.decideplusminus.data.models.entities.SimpleEntity
 
 @Database(
     entities = [
-        SimpleEntity::class
+        SimpleEntity::class,
+        DetailsEntity::class
     ],
     version = 1, exportSchema = true
 )
 abstract class SolutionDataBase : RoomDatabase() {
 
     companion object {
-        const val NAME = "database_decide_2"
+        const val NAME = "database_decide_9"
     }
 
     abstract fun decideDao(): SolutionDao

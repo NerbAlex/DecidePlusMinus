@@ -1,15 +1,15 @@
-package ru.inc.decideplusminus.data.models.dto
+package ru.inc.decideplusminus.data.models.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class SimpleEntity(
+data class DetailsEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
+    val parentId: Long,
     val type: Int,
     val name: String,
-    val percent: String,
-    val positiveCount: Int,
-    val negativeCount: Int
+    val argumentLvl: Int,
+    val argumentDescription: String
 )

@@ -1,12 +1,10 @@
 package ru.inc.decideplusminus.frameworks.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import ru.inc.decideplusminus.data.models.dto.SimpleEntity
+import ru.inc.decideplusminus.data.models.entities.DetailsEntity
+import ru.inc.decideplusminus.data.models.entities.SimpleEntity
 
 @Dao
 interface SolutionDao {
@@ -16,4 +14,15 @@ interface SolutionDao {
 
     @Query("SELECT * FROM simpleentity")
     fun getAll(): Single<List<SimpleEntity>>
+
+
+
+    @Transaction
+    @Insert(entity = DetailsEntity::class, onConflict = OnConflictStrategy.REPLACE)
+    fun insertDetails(detailsEntity: DetailsEntity): Completable
+
+    // TODO
+    @Transaction
+    @Query("SELECT * FROM detailsentity WHERE id = :parentId")
+    fun getDetailsById(parentId: Long): Single<List<DetailsEntity>>
 }

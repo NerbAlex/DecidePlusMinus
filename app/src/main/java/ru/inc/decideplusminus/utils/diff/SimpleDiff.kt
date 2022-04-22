@@ -13,7 +13,7 @@ class SimpleDiff: DiffUtil.ItemCallback<BaseSimpleItem>() {
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: BaseSimpleItem, newItem: BaseSimpleItem): Boolean {
         return when(true) {
-            (oldItem is SimpleVO && newItem is SimpleVO) -> { oldItem == newItem }
+            (oldItem is SimpleVO && newItem is SimpleVO) -> { oldItem.name == newItem.name }
             else -> areItemsTheSame(oldItem, newItem)
         }
     }

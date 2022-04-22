@@ -34,9 +34,8 @@ class SimpleRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun getSimpleDetailsSolutions(parentId: Long): Single<List<SimpleDetailsVO>> {
-        TODO("Not yet implemented")
-    }
+    override fun getSimpleDetailsSolutions(parentId: Long): Single<SimpleDetailsViewState> =
+        localDataSource.getDetailsById(parentId)
 
     override fun updateSimpleVo(newVO: SimpleVO): Completable {
         return Completable.complete()// TODO
