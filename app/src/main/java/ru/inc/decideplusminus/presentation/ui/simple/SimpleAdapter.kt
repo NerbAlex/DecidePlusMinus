@@ -7,7 +7,7 @@ import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseViewHolder
 import ru.inc.decideplusminus.utils.ViewHoldersFactory
 import ru.inc.decideplusminus.utils.diff.SimpleDiff
 
-class SimpleAdapter(private val listeners: SimpleAdapterListener, private val lastItemBindListener: (Int) -> Unit) :
+class SimpleAdapter(private val listeners: SimpleAdapterListener) :
     ListAdapter<BaseSimpleItem, BaseViewHolder<BaseSimpleItem>>(SimpleDiff()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BaseSimpleItem> =

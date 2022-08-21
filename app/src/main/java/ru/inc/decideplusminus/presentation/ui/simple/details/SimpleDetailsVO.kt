@@ -11,7 +11,7 @@ import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
  * @param argumentDescription - Описание аргумента, опциональное поле, если null, не показывать иконку описания
  */
 data class SimpleDetailsVO(
-    override val id: Long,
+    override val id: Long = 0,
     override val type: Int,
     val name: String,
     val parentId: Long,

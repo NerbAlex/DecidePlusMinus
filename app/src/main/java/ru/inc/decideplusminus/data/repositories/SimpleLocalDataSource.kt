@@ -10,8 +10,9 @@ import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.Simp
 interface SimpleLocalDataSource {
 
     fun getAll(): Single<List<BaseSimpleItem>>
-    fun updateData(baseSimpleItem: BaseSimpleItem): Completable
+    fun insert(simpleSolution: SimpleVO): Completable
     fun create(simpleSolution: SimpleVO): Completable
-    fun getDetailsById(parentId: Long): Single<SimpleDetailsViewState>
+    fun getDetailsById(parentId: Long): Single<Pair<List<SimpleDetailsVO>, List<SimpleDetailsVO>>>
     fun insertDetails(detailsVO: SimpleDetailsVO): Completable
+    fun getSimple(id: Long): Single<SimpleVO>
 }

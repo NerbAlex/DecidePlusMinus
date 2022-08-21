@@ -12,9 +12,9 @@ import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.Simp
 interface SimpleRepository {
 
     fun getSimpleSolutions(): Single<List<BaseSimpleItem>>
-    fun getSimpleSolution(id: Long): Single<BaseSimpleItem>
+    fun getSimpleSolution(id: Long): Single<SimpleVO>
     fun getSimpleDetailSolution(): Single<SimpleDetailsVO>
-    fun getSimpleDetailsSolutions(parentId: Long): Single<SimpleDetailsViewState>
+    fun getSimpleDetailsSolutions(parentId: Long): Single<Pair<List<SimpleDetailsVO>, List<SimpleDetailsVO>>>
 
     fun updateSimpleVo(newVO: SimpleVO): Completable
     fun createSimpleSolution(simpleSolution: SimpleVO): Completable

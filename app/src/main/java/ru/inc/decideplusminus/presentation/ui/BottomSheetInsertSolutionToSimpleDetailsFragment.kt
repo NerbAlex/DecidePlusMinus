@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import ru.inc.decideplusminus.R
 import ru.inc.decideplusminus.databinding.FragmentBottomSheetInsertSolutionBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseBottomSheetFragment
+import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.presentation.view_model.simple.insert_to_simple.InsertSolutionToSimpleDetailsVM
 import ru.inc.decideplusminus.presentation.view_model.simple.insert_to_simple.InsertSolutionToSimpleDetailsViewState
 
@@ -17,7 +18,7 @@ class BottomSheetInsertSolutionToSimpleDetailsFragment :
 
     private var viewModel: InsertSolutionToSimpleDetailsVM? = null
     private val navArgs: BottomSheetInsertSolutionToSimpleDetailsFragmentArgs by navArgs()
-    private var solutionId: Long? = null
+    private var parentId: Long? = null
     private var argumentLvl: Int = 2
 
     var flag = true
@@ -57,21 +58,29 @@ class BottomSheetInsertSolutionToSimpleDetailsFragment :
         }
 
         binding.minus.setOnClickListener {
-            viewModel?.minus(solutionId, argumentLvl, binding.editText.text.toString().trim())
+            viewModel?.minus(parentId, argumentLvl, binding.editText.text.toString().trim())
         }
 
         binding.plus.setOnClickListener {
-            viewModel?.plus(solutionId, argumentLvl, binding.editText.text.toString().trim())
+            viewModel?.plus(parentId, argumentLvl, binding.editText.text.toString().trim())
         }
     }
 
     private fun getArgs() {
-        solutionId = navArgs.solutionId
+        parentId = navArgs.solutionId
     }
 
     override fun renderState(state: InsertSolutionToSimpleDetailsViewState) {
         when (state) {
-            InsertSolutionToSimpleDetailsViewState.CompletedAddDetails -> findNavController().popBackStack()
+            InsertSolutionToSimpleDetailsViewState.CompletedAddDetails -> {
+                findNavController().popBackStack()
+//                sendEvent(UiEvent.ReloadMainPage)
+            }
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        sendEvent(UiEvent.ReloadMainPage)
     }
 }

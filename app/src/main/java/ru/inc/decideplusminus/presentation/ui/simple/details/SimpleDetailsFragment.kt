@@ -8,8 +8,10 @@ import ru.inc.decideplusminus.databinding.FragmentSimpleDetailsBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseFragment
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleAdapter
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleAdapterListener
+import ru.inc.decideplusminus.presentation.ui.simple.SimpleDetailsListener
 import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewState
 import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewModel
+import ru.inc.decideplusminus.utils.ViewHoldersFactory
 
 class SimpleDetailsFragment :
     BaseFragment<FragmentSimpleDetailsBinding, SimpleDetailsViewState>(FragmentSimpleDetailsBinding::inflate) {
@@ -18,36 +20,30 @@ class SimpleDetailsFragment :
     private val viewModel: SimpleDetailsViewModel by lazy { initViewModel() }
     private var adapterPositive: SimpleAdapter? = null
     private var adapterNegative: SimpleAdapter? = null
+    private var parentId: Long? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerViews()
 
-        val id = navArgs.parentId
-        viewModel.searchById(id)
+        parentId = navArgs.parentId
+        parentId?.let(viewModel::searchById)
     }
 
-    private fun listener(): SimpleAdapterListener.SimpleDetailsListener =
-        object : SimpleAdapterListener.SimpleDetailsListener {
-            override fun click(): (SimpleDetailsVO) -> Unit = {
-                // TODO поменять это на красивые лямбды с сылками на метод
-            }
-        }
+    private fun listener(vo: SimpleDetailsVO) {
+
+    }
 
     private fun bindLastItem(lastPosition: Int) {
 
     }
 
     private fun initRecyclerViews() {
-        adapterPositive = SimpleAdapter(listener(), ::bindLastItem)
-        binding.recyclerPositive.layoutManager =
-            LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerPositive.setHasFixedSize(true)
+        adapterPositive = SimpleAdapter(SimpleDetailsListener(::listener))
+        binding.recyclerPositive.setHasFixedSize(true) // todo удалить, когда сделаю раскрываемые айтемы с подробным описанием
         binding.recyclerPositive.adapter = adapterPositive
 
-        adapterNegative = SimpleAdapter(listener(), ::bindLastItem)
-        binding.recyclerNegative.layoutManager =
-            LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
+        adapterNegative = SimpleAdapter(SimpleDetailsListener(::listener))
         binding.recyclerNegative.setHasFixedSize(true)
         binding.recyclerNegative.adapter = adapterNegative
     }

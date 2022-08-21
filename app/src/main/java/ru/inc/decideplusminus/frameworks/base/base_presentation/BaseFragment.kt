@@ -25,9 +25,11 @@ abstract class BaseFragment<Binding : ViewBinding, State>(private val inflate: I
 
     abstract fun renderState(state: State)
 
-    protected fun eventHandler(event: (UiEvent) -> Unit) {
+    protected fun eventHandler(vararg filterEvents: UiEvent, event: (UiEvent) -> Unit) {
         with(uiEvents) {
-            this@BaseFragment.requireContext().subscribeUiEvents { event.invoke(it) }
+            this@BaseFragment.requireContext().subscribeUiEvents { resultEvent ->
+                if (filterEvents.contains(resultEvent)) event.invoke(resultEvent)
+            }
         }
     }
 

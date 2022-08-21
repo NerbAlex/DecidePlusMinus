@@ -15,36 +15,31 @@ object ViewHoldersFactory {
         LayoutInflater.from(parent.context).let { inflater ->
             return when (viewType) {
                 BaseSimpleItem.POSITIVE -> {
-                    val listeners = listener as SimpleAdapterListener.SimpleListener
                     SimplePositiveVH(
-                        ItemSimplePositiveVhBinding.inflate(inflater, parent, false), listeners
+                        ItemSimplePositiveVhBinding.inflate(inflater, parent, false), listener as SimpleListener
                     )
                 }
                 BaseSimpleItem.NEGATIVE -> {
-                    val listeners = listener as SimpleAdapterListener.SimpleListener
                     SimpleNegativeVH(
-                        ItemSimpleNegativeVhBinding.inflate(inflater, parent, false), listeners
+                        ItemSimpleNegativeVhBinding.inflate(inflater, parent, false), listener as SimpleListener
                     )
                 }
                 BaseSimpleItem.TEACHER -> TeacherVH(
                     ItemTeacherSolutionBinding.inflate(inflater, parent, false)
                 )
                 BaseSimpleItem.NEUTRAL -> {
-                    val listeners = listener as SimpleAdapterListener.SimpleListener
                     SimpleNeutralVH(
-                        ItemSimpleNeutraleVhBinding.inflate(inflater, parent, false), listeners
+                        ItemSimpleNeutraleVhBinding.inflate(inflater, parent, false), listener as SimpleListener
                     )
                 }
                 BaseSimpleItem.DETAILS_NEGATIVE -> {
-                    val listeners = listener as SimpleAdapterListener.SimpleDetailsListener
                     SimpleDetailsNegativeVH(
-                        ItemSimpleDetailsNegativeVhBinding.inflate(inflater, parent, false), listeners
+                        ItemSimpleDetailsNegativeVhBinding.inflate(inflater, parent, false), listener as SimpleDetailsListener
                     )
                 }
                 BaseSimpleItem.DETAILS_POSITIVE -> {
-                    val listeners = listener as SimpleAdapterListener.SimpleDetailsListener
                     SimpleDetailsPositiveVH(
-                        ItemSimpleDetailsPositiveVhBinding.inflate(inflater, parent, false), listeners
+                        ItemSimpleDetailsPositiveVhBinding.inflate(inflater, parent, false), listener as SimpleDetailsListener
                     )
                 }
                 else -> throw IllegalArgumentException("Unknown viewType")

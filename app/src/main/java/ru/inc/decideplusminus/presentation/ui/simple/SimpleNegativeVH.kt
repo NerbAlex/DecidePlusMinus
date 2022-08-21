@@ -6,7 +6,7 @@ import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseViewHolder
 
 class SimpleNegativeVH(
     private val view: ItemSimpleNegativeVhBinding,
-    private val listeners: SimpleAdapterListener.SimpleListener
+    private val listeners: SimpleListener
 ) :
     BaseViewHolder<BaseSimpleItem>(view) {
     override fun bind(model: BaseSimpleItem) = with(model as SimpleVO) {
@@ -15,11 +15,11 @@ class SimpleNegativeVH(
         view.percentTv.text = percent
 
         view.openSolutionBtn.setOnClickListener {
-            listeners.clickOpenDetailsArguments().invoke(model)
+            listeners.clickOpenDetailsArguments.invoke(model)
         }
 
         view.addArgumentBtn.setOnClickListener {
-            listeners.clickAddArgument().invoke(model)
+            listeners.clickAddArgument.invoke(model)
         }
     }
 }

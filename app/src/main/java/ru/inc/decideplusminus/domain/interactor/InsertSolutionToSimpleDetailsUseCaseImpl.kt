@@ -12,49 +12,84 @@ class InsertSolutionToSimpleDetailsUseCaseImpl @Inject constructor(
     private val repository: SimpleRepository
 ) : InsertSolutionUseCase {
 
-
-    override fun plus(solutionId: Long, argumentLvl: Int, name: String): Completable {
-        return repository.getSimpleSolution(solutionId).flatMapCompletable { simpleVO ->
-            // TODO прочекать на каких потоках все исполняется и добавить поток(и)
-            return@flatMapCompletable updateSimpleVO(simpleVO as SimpleVO, argumentLvl, true)
-                .andThen(insertDetailSolution(solutionId, argumentLvl, name, true))
-        }
+    companion object {
+        private const val DEFAULT_PERCENT = "50%"
+        private const val DOUBLE_100 = 100.00
     }
+
+    override fun plus(solutionId: Long, argumentLvl: Int, name: String): Completable =
+        handleSolutions(
+            solutionId = solutionId,
+            argumentLvl = argumentLvl,
+            name = name,
+            isPositive = true
+        )
+
+    override fun minus(solutionId: Long, argumentLvl: Int, name: String): Completable =
+        handleSolutions(
+            solutionId = solutionId,
+            argumentLvl = argumentLvl,
+            name = name,
+            isPositive = false
+        )
+
+    private fun handleSolutions(
+        solutionId: Long,
+        argumentLvl: Int,
+        name: String,
+        isPositive: Boolean
+    ): Completable =
+        repository.getSimpleSolution(solutionId).flatMapCompletable { simpleVO ->
+            updateSimpleVO(
+                simpleVO = simpleVO as SimpleVO,
+                argumentLvl = argumentLvl,
+                isPositive = isPositive
+            ).andThen(
+                insertDetailSolution(
+                    solutionId = solutionId,
+                    argumentLvl = argumentLvl,
+                    name = name,
+                    isPositive = isPositive
+                )
+            )
+        }
 
     private fun updateSimpleVO(simpleVO: SimpleVO, argumentLvl: Int, isPositive: Boolean): Completable {
         val newVO = if (isPositive) {
-            updateVO((simpleVO.positiveCount + argumentLvl).toDouble(), simpleVO.negativeCount.toDouble(), simpleVO)
+            updateSimpleVO(
+                positiveCount = (simpleVO.positiveCount + argumentLvl).toDouble(),
+                negativeCount = simpleVO.negativeCount.toDouble(),
+                vo = simpleVO
+            )
         } else {
-            updateVO(simpleVO.positiveCount.toDouble(), (simpleVO.negativeCount + argumentLvl).toDouble(), simpleVO)
+            updateSimpleVO(
+                positiveCount = simpleVO.positiveCount.toDouble(),
+                negativeCount = (simpleVO.negativeCount + argumentLvl).toDouble(),
+                vo = simpleVO
+            )
         }
-        // TODO проверить здесь очередность исполнения кода, что добавится новое VO из условного оператора
-
         return repository.updateSimpleVo(newVO)
     }
 
-    private fun insertDetailSolution(solutionId: Long, argumentLvl: Int, name: String, isPositive: Boolean): Completable {
+    private fun insertDetailSolution(
+        solutionId: Long,
+        argumentLvl: Int,
+        name: String,
+        isPositive: Boolean
+    ): Completable {
         val type = if (isPositive) BaseSimpleItem.DETAILS_POSITIVE else BaseSimpleItem.DETAILS_NEGATIVE
-        // TODO сразу делать ДТО модели или в дата слое?
+
         val vo = SimpleDetailsVO(
-            id = System.nanoTime(),
             type = type,
             name = name,
             parentId = solutionId,
             argumentLvl = argumentLvl,
-            argumentDescription = "description"
+            argumentDescription = "todo 89 ticket" // TODO [PET-SOL-HNDLR-89] - обработка описания
         )
         return repository.insertSimpleDetail(vo)
     }
 
-    override fun minus(solutionId: Long, argumentLvl: Int, name: String): Completable {
-        return repository.getSimpleSolution(solutionId).flatMapCompletable { simpleVO ->
-
-            return@flatMapCompletable updateSimpleVO(simpleVO as SimpleVO, argumentLvl, false)
-                .andThen(insertDetailSolution(solutionId, argumentLvl, name, false))
-        }
-    }
-
-    private fun updateVO(positiveCount: Double, negativeCount: Double, vo: SimpleVO): SimpleVO {
+    private fun updateSimpleVO(positiveCount: Double, negativeCount: Double, vo: SimpleVO): SimpleVO {
         val sum = positiveCount + negativeCount
 
         val percentAndType = when {
@@ -63,14 +98,14 @@ class InsertSolutionToSimpleDetailsUseCaseImpl @Inject constructor(
                 val type = BaseSimpleItem.POSITIVE
                 Pair(percent, type)
             }
-            positiveCount == negativeCount -> {
-                val percent = "50%"
-                val type = BaseSimpleItem.NEUTRAL
+            positiveCount < negativeCount -> {
+                val percent = calculatePercent(negativeCount, sum)
+                val type = BaseSimpleItem.NEGATIVE
                 Pair(percent, type)
             }
             else -> {
-                val percent = calculatePercent(negativeCount, sum)
-                val type = BaseSimpleItem.NEGATIVE
+                val percent = DEFAULT_PERCENT
+                val type = BaseSimpleItem.NEUTRAL
                 Pair(percent, type)
             }
         }
@@ -84,7 +119,7 @@ class InsertSolutionToSimpleDetailsUseCaseImpl @Inject constructor(
 
     private fun calculatePercent(count: Double, sum: Double): String {
         val calc = (count / sum)
-        val percent = calc * 100.00
+        val percent = calc * DOUBLE_100
         return "${percent.roundToInt()}%"
     }
 }

@@ -6,11 +6,11 @@ import javax.inject.Inject
 
 class SimpleDetailsViewModel @Inject constructor(
     private val repository: SimpleRepository
-): BaseViewModel<SimpleDetailsViewState>() {
+) : BaseViewModel<SimpleDetailsViewState>() {
 
     fun searchById(id: Long) {
         compositeDisposable.add(repository.getSimpleDetailsSolutions(id).subscribe({
-            mutableLiveData.postValue(it)
+            mutableLiveData.postValue(SimpleDetailsViewState.SuccessLists(it.first, it.second))
         }, {}))
     }
 }

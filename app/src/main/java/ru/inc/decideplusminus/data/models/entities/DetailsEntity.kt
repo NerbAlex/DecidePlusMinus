@@ -11,5 +11,5 @@ data class DetailsEntity(
     val type: Int,
     val name: String,
     val argumentLvl: Int,
-    val argumentDescription: String
+    val argumentDescription: String?
 )

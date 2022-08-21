@@ -9,7 +9,6 @@ import ru.inc.decideplusminus.frameworks.base.base_data.SimpleMapper
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.presentation.ui.simple.SimpleVO
 import ru.inc.decideplusminus.presentation.ui.simple.details.SimpleDetailsVO
-import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewState
 import ru.inc.decideplusminus.utils.perfomance.bench
 import javax.inject.Inject
 
@@ -18,26 +17,34 @@ class SimpleLocalDataSourceImpl @Inject constructor(private val db: SolutionData
 
     override fun getAll(): Single<List<BaseSimpleItem>> =
         bench("dataSource") {
-            db.decideDao().getAll().toSimpleVoList().subscribeOn(Schedulers.io())
+            db.decideDao().getAll().toVoList().subscribeOn(Schedulers.io())
         }
 
-
-    override fun updateData(baseSimpleItem: BaseSimpleItem): Completable {
-        TODO("Not yet implemented")
+    override fun insert(simpleSolution: SimpleVO): Completable {
+        return db.decideDao().insert(simpleSolution.toEntity()).subscribeOn(Schedulers.io())
     }
 
     override fun create(simpleSolution: SimpleVO): Completable =
         db.decideDao().insert(simpleSolution.toEntity()).subscribeOn(Schedulers.io())
 
+    override fun getDetailsById(parentId: Long): Single<Pair<List<SimpleDetailsVO>, List<SimpleDetailsVO>>> =
+         db.decideDao().getDetailsById(parentId).flatMap { detailsEntityList ->
+            val positiveList = detailsEntityList.toPositiveVoList()
+            val negativeList = detailsEntityList.toNegativeVoList()
+            return@flatMap Single.just(Pair(positiveList, negativeList))
+        }.subscribeOn(Schedulers.io())
 
-    override fun getDetailsById(parentId: Long): Single<SimpleDetailsViewState> {
-//        db.decideDao().getDetailsById(parentId).toDetailsVOList().flatMap {
-//
-//        }
-        TODO("Not yet implemented")
-    }
 
     override fun insertDetails(detailsVO: SimpleDetailsVO): Completable {
-        TODO("Not yet implemented")
+        return db.decideDao()
+            .insertDetails(detailsVO.toEntity())
+            .subscribeOn(Schedulers.io())
+    }
+
+    override fun getSimple(id: Long): Single<SimpleVO> {
+        return db.decideDao()
+            .getSimple(id)
+            .map { it.toVO() }
+            .subscribeOn(Schedulers.io())
     }
 }

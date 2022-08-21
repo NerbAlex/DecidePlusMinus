@@ -11,16 +11,20 @@ class InsertSolutionToSimpleDetailsVM @Inject constructor(
     fun plus(solutionId: Long?, argumentLvl: Int, name: String) {
         if (solutionId == null) return
 
-        useCase.plus(solutionId, argumentLvl, name).subscribe {
+        useCase.plus(solutionId, argumentLvl, name).subscribe ({
             mutableLiveData.postValue(InsertSolutionToSimpleDetailsViewState.CompletedAddDetails)
-        }.addDisposable()
+        }, {
+            val a  = it
+        }).addDisposable()
     }
 
     fun minus(solutionId: Long?, argumentLvl: Int, name: String) {
         if (solutionId == null) return
 
-        useCase.minus(solutionId, argumentLvl, name).subscribe {
+        useCase.minus(solutionId, argumentLvl, name).subscribe ({
             mutableLiveData.postValue(InsertSolutionToSimpleDetailsViewState.CompletedAddDetails)
-        }.addDisposable()
+        }, {
+            val a  = it
+        }).addDisposable()
     }
 }
