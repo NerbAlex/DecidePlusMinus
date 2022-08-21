@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.inc.decideplusminus">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:name="ru.inc.decideplusminus.presentation.ui.MyApp"
         android:allowBackup="true"

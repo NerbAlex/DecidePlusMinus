@@ -50,6 +50,9 @@
         <argument
             android:name="solutionId"
             app:argType="long" />
+        <argument
+            android:name="solutionName"
+            app:argType="string" />
     </dialog>
     <dialog
         android:id="@+id/bottomSheetCreateSimple"

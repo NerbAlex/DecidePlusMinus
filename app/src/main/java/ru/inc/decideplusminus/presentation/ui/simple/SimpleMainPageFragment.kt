@@ -82,7 +82,7 @@ class SimpleMainPageFragment :
 
     private fun clickArgument(vo: SimpleVO) {
         // TODO передавать еще имя кликнутого решения
-        SimpleMainPageFragmentDirections.actionToBottomSheetInsertSolutionToSimpleDetails(vo.id)
+        SimpleMainPageFragmentDirections.actionToBottomSheetInsertSolutionToSimpleDetails(vo.id, vo.name)
             .let { action ->
                 findNavController().navigate(action)
             }
