@@ -88,4 +88,6 @@ dependencies {
     Logger
     def timber_version = "4.7.1"
     implementation "com.jakewharton.timber:timber:$timber_version"
+
+//    implementation 'com.ms-square:etsyblur:0.2.1'
 }

@@ -1,17 +1,21 @@
 package ru.inc.decideplusminus.presentation.ui.simple
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.*
 import ru.inc.decideplusminus.R
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseFragment
 import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewModel
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewState
+import ru.inc.decideplusminus.utils.extensions.*
 import ru.inc.decideplusminus.utils.extensions.scrollOrSmoothScrollToPosition
 
 class SimpleMainPageFragment :
@@ -23,10 +27,10 @@ class SimpleMainPageFragment :
 
     // TODO при добавлении в список нового итема, он должен скролится к последнему
 
-    private var adapter: SimpleAdapter? = null
+    private var simpleAdapter: SimpleAdapter? = null
     private var viewModel: SimpleMainPageViewModel? = null
-    private var animation: LayoutAnimationController? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
@@ -35,7 +39,7 @@ class SimpleMainPageFragment :
         viewModel?.downloadData()
 
         findNavController().addOnDestinationChangedListener { controller, destination, arguments ->
-            val a  = 10
+            val a = 10
         }
 
         eventHandler(UiEvent.ReloadMainPage) {
@@ -46,7 +50,7 @@ class SimpleMainPageFragment :
     private fun bindLastItem(lastPosition: Int) {
         updateView {
             recycler.stopScroll()
-            adapter?.let {
+            simpleAdapter?.let {
                 recycler.scrollOrSmoothScrollToPosition(lastPosition)
             }
         }
@@ -55,7 +59,7 @@ class SimpleMainPageFragment :
     override fun renderState(state: SimpleMainPageViewState) {
         when (state) {
             is SimpleMainPageViewState.Success -> {
-                adapter?.submitList(state.list) {
+                simpleAdapter?.submitList(state.list) {
                     binding.recycler.startLayoutAnimation()
 //                    if (state.list.isEmpty()) return@submitList
 //                    bindLastItem(state.list.lastIndex)
@@ -68,9 +72,10 @@ class SimpleMainPageFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
-        adapter = null
+        simpleAdapter = null
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun initListeners() {
         //TODO если голосовое управление, показывать всплывающую подсказку в начале списка
         binding.createNewSolution.setOnClickListener {
@@ -95,17 +100,16 @@ class SimpleMainPageFragment :
         }
     }
 
-    private fun initRecyclerView() {
+    private fun initRecyclerView() = with(binding.recycler) {
         val listeners = SimpleListener(::clickArgument, ::clickOpenDetailsArguments)
 
-        adapter = SimpleAdapter(listeners)
-        binding.recycler.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
-        binding.recycler.setHasFixedSize(true)
-        binding.recycler.adapter = adapter
+        simpleAdapter = SimpleAdapter(listeners)
+        layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
+//        setHasFixedSize(true) // todo когда выровняю все итемы по размеру
+        adapter = simpleAdapter
 
-        animation = LayoutAnimationController(AnimationUtils.loadAnimation(requireContext(), R.anim.item_anim))
-        animation?.delay = 0.15f
-        animation?.order = LayoutAnimationController.ORDER_NORMAL
-        binding.recycler.layoutAnimation = animation
+        addItemDecoration(ToolbarDecoration())
+        toolbarAnimationWithRecyclerView(this)
+        layoutAnimation = createDefaultRecyclerAnimation()
     }
 }

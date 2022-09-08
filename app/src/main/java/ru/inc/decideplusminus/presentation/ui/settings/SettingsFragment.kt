@@ -15,8 +15,6 @@ class SettingsFragment : Fragment() {
     private lateinit var settingsViewModel: SettingsViewModel
     private var _binding: FragmentSettingsBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,15 +23,14 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         settingsViewModel =
-            ViewModelProvider(this).get(SettingsViewModel::class.java)
+            ViewModelProvider(this)[SettingsViewModel::class.java]
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        settingsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        settingsViewModel.text.observe(viewLifecycleOwner) {
+
+        }
         return root
     }
 

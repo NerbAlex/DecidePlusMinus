@@ -2,10 +2,12 @@ package ru.inc.decideplusminus.presentation.ui.simple
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseSimpleItem
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseViewHolder
 import ru.inc.decideplusminus.utils.ViewHoldersFactory
 import ru.inc.decideplusminus.utils.diff.SimpleDiff
+
 
 class SimpleAdapter(private val listeners: SimpleAdapterListener) :
     ListAdapter<BaseSimpleItem, BaseViewHolder<BaseSimpleItem>>(SimpleDiff()) {

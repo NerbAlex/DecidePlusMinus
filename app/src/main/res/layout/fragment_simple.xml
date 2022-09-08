@@ -16,11 +16,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_simple_positive_vh" />
 
+<!--    <com.ms_square.etsyblur.BlurringView-->
+<!--        android:id="@+id/blurView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createNewSolution"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/add_solution"
+        android:src="@drawable/ic_data_saver_on"
         app:tint="@color/white"
         app:maxImageSize="32dp"
         app:backgroundTint="@color/neutral"

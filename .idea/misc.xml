@@ -5,6 +5,11 @@
       <map>
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/add_circle.xml" value="0.4036458333333333" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/add_solution.xml" value="0.3828125" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/attach.xml" value="0.2565" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/bottom_navigation_icon.xml" value="0.2565" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/ic_awesome.xml" value="0.2565" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/ic_data_saver_on.xml" value="0.2565" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/ic_round_input.xml" value="0.2565" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/mic.xml" value="0.4036458333333333" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/drawable/remove_circle.xml" value="0.4036458333333333" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/activity_main.xml" value="0.3625" />
@@ -15,18 +20,19 @@
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_bottom_sheet_create_solution.xml" value="0.67" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_bottom_sheet_insert_solution.xml" value="0.3625" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_complex.xml" value="0.36666666666666664" />
-        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_settings.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_simple.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/fragment_simple_details.xml" value="0.5" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/item_simple_details_negative_vh.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/item_simple_details_positive_vh.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/item_simple_negative_vh.xml" value="0.3625" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/item_simple_neutrale_vh.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/layout/item_simple_positive_vh.xml" value="0.3875" />
         <entry key="..\:/Android/DecidePlusMinus/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

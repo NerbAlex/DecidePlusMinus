@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.DecidePlusMinus" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/success</item>
+        <item name="colorPrimary">@color/success_light</item>
         <item name="colorPrimaryVariant">@color/success</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->

@@ -1,5 +1,6 @@
 package ru.inc.decideplusminus.presentation.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -21,12 +22,12 @@ class MainActivity : AppCompatActivity() {
         initSystemUi()
     }
 
+    @SuppressLint("RestrictedApi")
     private fun initSystemUi() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         navController = navHostFragment.navController
 
         binding.toolbar.setupWithNavController(navController)
