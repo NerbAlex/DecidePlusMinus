@@ -15,9 +15,9 @@ private const val ALPHA_INVISIBLE = 0f
 private const val ALPHA_VISIBLE = 1f
 private const val DEFAULT_FADE_DURATION = 300L
 private const val DEFAULT_MOTION_DURATION = 600L
-private const val DEFAULT_ON_COMPLETE_DELAY = 100L
 private const val MOTION_UP_VALUE = -200f
 private const val MOTION_DOWN_VALUE = 200f
+private const val SCROLL_PROCESS_DELAY = 2000L
 
 fun Fragment.createDefaultRecyclerAnimation(): LayoutAnimationController =
     LayoutAnimationController(AnimationUtils.loadAnimation(requireContext(), R.anim.item_anim)).apply {
@@ -50,15 +50,11 @@ internal fun View.fadeOut(duration: Long = DEFAULT_FADE_DURATION, onCompleted: (
     }
 }
 
-internal fun View.motionUp(
-    duration: Long = DEFAULT_MOTION_DURATION,
-    onCompleteDelay: Long = DEFAULT_ON_COMPLETE_DELAY,
-    onCompleted: () -> Unit
-) {
+internal fun View.motionUp(duration: Long = DEFAULT_MOTION_DURATION, onCompleted: () -> Unit) {
     animate().apply {
         yBy(MOTION_UP_VALUE)
         this.duration = duration
-        withEndAction { postDelayed(onCompleted, onCompleteDelay) }
+        withEndAction { onCompleted.invoke() }
     }
 }
 
@@ -70,49 +66,65 @@ internal fun View.motionDown(duration: Long = DEFAULT_MOTION_DURATION, onComplet
     }
 }
 
-fun Fragment.toolbarAnimationWithRecyclerView(
+internal fun Fragment.toolbarAnimationWithRecyclerView(
     recyclerView: RecyclerView,
     decoration: RecyclerView.ItemDecoration = ToolbarDecoration()
 ) {
+    recyclerView.addItemDecoration(ToolbarDecoration())
+
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
         val toolbar = requireActivity().findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         var isToolbarVisible = true
-        var isAnimationProcess = false
+        var isMotionUpAnimationProcess = false
+        var isMotionDownAnimationProcess = false
+        var startDragTime: Long = 0
+        var isIdle = false
+
+        private fun repeatCheckMotionDownAnimation() {
+            toolbar.postDelayed(
+                {
+                    val lastDragTime = System.currentTimeMillis() - startDragTime
+
+                    if (lastDragTime < SCROLL_PROCESS_DELAY) {
+                        repeatCheckMotionDownAnimation()
+                    } else {
+                        if (isToolbarVisible || isMotionDownAnimationProcess) return@postDelayed
+
+                        isMotionDownAnimationProcess = true
+                        toolbar.motionDown {
+                            recyclerView.addItemDecoration(decoration)
+                            isMotionDownAnimationProcess = false
+                            isToolbarVisible = true
+                        }
+                    }
+                }, SCROLL_PROCESS_DELAY
+            )
+        }
 
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
 
             if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                if (isToolbarVisible && !isAnimationProcess) {
-                    isToolbarVisible = false
-                    isAnimationProcess = true
-                    recyclerView.removeItemDecorationAt(0)
+                startDragTime = System.currentTimeMillis()
+                isIdle = false
+
+                if (isToolbarVisible && !isMotionUpAnimationProcess && !isMotionDownAnimationProcess) {
+                    isMotionUpAnimationProcess = true
                     toolbar.motionUp {
-                        isAnimationProcess = false
-                        if (isToolbarVisible && !isAnimationProcess) {
-                            isAnimationProcess = true
-                            toolbar.motionDown {
-                                recyclerView.addItemDecoration(decoration)
-                                isAnimationProcess = false
-                            }
+                        recyclerView.removeItemDecorationAt(0)
+                        isMotionUpAnimationProcess = false
+                        isToolbarVisible = false
+                        if (isIdle && !isMotionDownAnimationProcess) {
+                            repeatCheckMotionDownAnimation()
                         }
                     }
                 }
             }
 
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                if (isAnimationProcess) {
-                    isToolbarVisible = true
-                    return
-                }
-                if (!isToolbarVisible) {
-                    isAnimationProcess = true
-                    toolbar.motionDown {
-                        recyclerView.addItemDecoration(decoration)
-                        isToolbarVisible = true
-                        isAnimationProcess = false
-                    }
-                }
+                isIdle = true
+                if (isMotionUpAnimationProcess || isToolbarVisible || isMotionDownAnimationProcess) return
+                repeatCheckMotionDownAnimation()
             }
         }
     })

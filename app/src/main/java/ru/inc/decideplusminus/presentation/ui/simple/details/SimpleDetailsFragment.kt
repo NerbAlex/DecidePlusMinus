@@ -12,6 +12,7 @@ import ru.inc.decideplusminus.presentation.ui.simple.SimpleDetailsListener
 import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewState
 import ru.inc.decideplusminus.presentation.view_model.simple.simple_details.SimpleDetailsViewModel
 import ru.inc.decideplusminus.utils.ViewHoldersFactory
+import ru.inc.decideplusminus.utils.extensions.toolbarAnimationWithRecyclerView
 
 class SimpleDetailsFragment :
     BaseFragment<FragmentSimpleDetailsBinding, SimpleDetailsViewState>(FragmentSimpleDetailsBinding::inflate) {
@@ -46,6 +47,11 @@ class SimpleDetailsFragment :
         adapterNegative = SimpleAdapter(SimpleDetailsListener(::listener))
         binding.recyclerNegative.setHasFixedSize(true)
         binding.recyclerNegative.adapter = adapterNegative
+
+        // todo может и не нужены
+        toolbarAnimationWithRecyclerView(binding.recyclerPositive)
+        toolbarAnimationWithRecyclerView(binding.recyclerNegative)
+
     }
 
     override fun renderState(state: SimpleDetailsViewState) {

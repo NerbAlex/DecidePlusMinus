@@ -1,22 +1,17 @@
 package ru.inc.decideplusminus.presentation.ui.simple
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.RequiresApi
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.*
-import ru.inc.decideplusminus.R
 import ru.inc.decideplusminus.databinding.FragmentSimpleBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseFragment
 import ru.inc.decideplusminus.presentation.ui.events.UiEvent
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewModel
 import ru.inc.decideplusminus.presentation.view_model.simple.SimpleMainPageViewState
-import ru.inc.decideplusminus.utils.extensions.*
+import ru.inc.decideplusminus.utils.extensions.createDefaultRecyclerAnimation
 import ru.inc.decideplusminus.utils.extensions.scrollOrSmoothScrollToPosition
+import ru.inc.decideplusminus.utils.extensions.toolbarAnimationWithRecyclerView
 
 class SimpleMainPageFragment :
     BaseFragment<FragmentSimpleBinding, SimpleMainPageViewState>(FragmentSimpleBinding::inflate) {
@@ -30,17 +25,13 @@ class SimpleMainPageFragment :
     private var simpleAdapter: SimpleAdapter? = null
     private var viewModel: SimpleMainPageViewModel? = null
 
-    @RequiresApi(Build.VERSION_CODES.M)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         viewModel = initViewModel()
         initListeners()
         viewModel?.downloadData()
-
-        findNavController().addOnDestinationChangedListener { controller, destination, arguments ->
-            val a = 10
-        }
 
         eventHandler(UiEvent.ReloadMainPage) {
             viewModel?.downloadData()
@@ -75,7 +66,6 @@ class SimpleMainPageFragment :
         simpleAdapter = null
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun initListeners() {
         //TODO если голосовое управление, показывать всплывающую подсказку в начале списка
         binding.createNewSolution.setOnClickListener {
@@ -108,7 +98,6 @@ class SimpleMainPageFragment :
 //        setHasFixedSize(true) // todo когда выровняю все итемы по размеру
         adapter = simpleAdapter
 
-        addItemDecoration(ToolbarDecoration())
         toolbarAnimationWithRecyclerView(this)
         layoutAnimation = createDefaultRecyclerAnimation()
     }
