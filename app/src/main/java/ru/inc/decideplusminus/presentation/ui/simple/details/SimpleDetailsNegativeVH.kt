@@ -16,5 +16,10 @@ class SimpleDetailsNegativeVH(
         binding.openSolutionBtn.setOnClickListener {
             listeners.click.invoke(model)
         }
+
+        binding.openSolutionBtn.setOnLongClickListener {
+            listeners.delete.invoke(model)
+            true
+        }
     }
 }

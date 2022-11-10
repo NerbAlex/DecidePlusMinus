@@ -39,6 +39,14 @@ class SimpleRepositoryImpl @Inject constructor(
         return localDataSource.insertDetails(vo)
     }
 
+    override fun delete(id: Long): Completable {
+        return localDataSource.delete(id)
+    }
+
+    override fun deleteSimpleDetail(id: Long): Completable {
+        return localDataSource.deleteSimpleDetail(id)
+    }
+
     override fun createSimpleSolution(simpleSolution: SimpleVO): Completable = bench("create") {
         localDataSource.create(simpleSolution)
     }

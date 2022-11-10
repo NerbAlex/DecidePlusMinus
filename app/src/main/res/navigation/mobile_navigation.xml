@@ -42,6 +42,9 @@
             android:name="parentId"
             app:argType="long"
             android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_SimpleDetailsFragment_to_bottomSheetInsertSingleSolutionToSimpleDetailsFragment"
+            app:destination="@id/bottomSheetInsertSingleSolutionToSimpleDetailsFragment" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheetInsertSimpleToSimpleDetails"
@@ -58,4 +61,18 @@
         android:id="@+id/bottomSheetCreateSimple"
         android:name="ru.inc.decideplusminus.presentation.ui.simple.BottomSheetCreateSimpleFragment"
         android:label="BottomSheetAddSimpleSolution" />
+    <dialog
+        android:id="@+id/bottomSheetInsertSingleSolutionToSimpleDetailsFragment"
+        android:name="ru.inc.decideplusminus.presentation.ui.simple.details.BottomSheetInsertSingleSolutionToSimpleDetailsFragment"
+        android:label="BottomSheetInsertSingleSolutionToSimpleDetailsFragment" >
+        <argument
+            android:name="solutionId"
+            app:argType="long" />
+        <argument
+            android:name="solutionName"
+            app:argType="string" />
+        <argument
+            android:name="solutionStatus"
+            app:argType="boolean" />
+    </dialog>
 </navigation>

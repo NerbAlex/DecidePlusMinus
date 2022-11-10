@@ -21,5 +21,9 @@ class SimpleNegativeVH(
         view.addArgumentBtn.setOnClickListener {
             listeners.clickAddArgument.invoke(model)
         }
+
+        view.deleteArgumentBtn.setOnClickListener {
+            listeners.clickADeleteArgument.invoke(model)
+        }
     }
 }

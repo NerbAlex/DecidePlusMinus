@@ -47,6 +47,8 @@ class BottomSheetInsertSolutionToSimpleDetailsFragment :
         speechRecognizer?.destroy()
     }
 
+    override fun getTheme(): Int = R.style.CustomBottomSheetDialog
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,7 +57,8 @@ class BottomSheetInsertSolutionToSimpleDetailsFragment :
         viewModel = initViewModel()
         initSpeechRecognizer()
 
-        // TODO При дизайне закруглить диалог
+
+                // TODO При дизайне закруглить диалог
 
         // TODO скрывать клавиатуру, рассмотреть все кейсы с микрофоном и плюс/минусом
 

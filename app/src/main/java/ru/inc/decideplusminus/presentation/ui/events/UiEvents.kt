@@ -24,4 +24,5 @@ class UiEvents @Inject constructor() {
 
 sealed class UiEvent {
     object ReloadMainPage: UiEvent()
+    object ReloadDetailsPage: UiEvent()
 }

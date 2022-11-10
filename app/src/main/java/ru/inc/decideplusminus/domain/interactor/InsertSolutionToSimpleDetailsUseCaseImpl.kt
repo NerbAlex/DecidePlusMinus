@@ -13,8 +13,8 @@ class InsertSolutionToSimpleDetailsUseCaseImpl @Inject constructor(
 ) : InsertSolutionUseCase {
 
     companion object {
-        private const val DEFAULT_PERCENT = "50%"
-        private const val DOUBLE_100 = 100.00
+        const val DEFAULT_PERCENT = "50%"
+        const val DOUBLE_100 = 100.00
     }
 
     override fun plus(solutionId: Long, argumentLvl: Int, name: String): Completable =

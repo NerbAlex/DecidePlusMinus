@@ -1,5 +1,6 @@
 package ru.inc.decideplusminus.presentation.ui.simple
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,16 @@ class SimpleMainPageFragment :
 
     private var simpleAdapter: SimpleAdapter? = null
     private var viewModel: SimpleMainPageViewModel? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val a  = 10
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val a  = 10
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,7 +62,7 @@ class SimpleMainPageFragment :
         when (state) {
             is SimpleMainPageViewState.Success -> {
                 simpleAdapter?.submitList(state.list) {
-                    binding.recycler.startLayoutAnimation()
+//                    binding.recycler.startLayoutAnimation()
 //                    if (state.list.isEmpty()) return@submitList
 //                    bindLastItem(state.list.lastIndex)
                 }
@@ -75,7 +86,7 @@ class SimpleMainPageFragment :
         }
     }
 
-    private fun clickArgument(vo: SimpleVO) {
+    private fun clickAddArgument(vo: SimpleVO) {
         // TODO передавать еще имя кликнутого решения
         SimpleMainPageFragmentDirections.actionToBottomSheetInsertSolutionToSimpleDetails(vo.id, vo.name)
             .let { action ->
@@ -90,8 +101,12 @@ class SimpleMainPageFragment :
         }
     }
 
+    private fun clickDeleteArgument(vo: SimpleVO) {
+        viewModel?.delete(vo.id)
+    }
+
     private fun initRecyclerView() = with(binding.recycler) {
-        val listeners = SimpleListener(::clickArgument, ::clickOpenDetailsArguments)
+        val listeners = SimpleListener(::clickAddArgument, ::clickOpenDetailsArguments, ::clickDeleteArgument)
 
         simpleAdapter = SimpleAdapter(listeners)
         layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
@@ -102,3 +117,21 @@ class SimpleMainPageFragment :
         layoutAnimation = createDefaultRecyclerAnimation()
     }
 }
+
+fun main() {
+    val dtoFirst = Person1("Jack")
+    val dtoSecond = Person2(18)
+
+    val personVo1 = dtoFirst zipToPersonVo dtoSecond // todo прикольно
+    val personVo2 = dtoFirst.zipToPersonVo(dtoSecond)
+
+    println(personVo1)
+}
+
+private infix fun Person1.zipToPersonVo(some2: Person2): PersonVo {
+    return PersonVo(name, some2.age)
+}
+
+data class Person1(val name:String)
+data class Person2(val age: Int)
+data class PersonVo(val name: String, val age: Int)

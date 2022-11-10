@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_data_saver_on"
         app:tint="@color/white"
-        app:maxImageSize="32dp"
+        app:maxImageSize="46dp"
         app:backgroundTint="@color/neutral"
         app:rippleColor="@color/neutral_light"
         android:layout_marginBottom="12dp"

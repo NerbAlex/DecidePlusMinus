@@ -19,4 +19,7 @@ interface SimpleRepository {
     fun updateSimpleVo(newVO: SimpleVO): Completable
     fun createSimpleSolution(simpleSolution: SimpleVO): Completable
     fun insertSimpleDetail(vo: SimpleDetailsVO): Completable
+
+    fun delete(id: Long): Completable
+    fun deleteSimpleDetail(id: Long): Completable
 }

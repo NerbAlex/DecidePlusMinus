@@ -13,14 +13,16 @@ abstract class SimpleMapper {
     // TODO сваливать сюда все BaseItem и здесь разбираться
 
     protected fun SimpleVO.toEntity(): SimpleEntity {
-        return SimpleEntity(
-            id = id,
-            name = name,
-            type = type,
-            percent = percent,
-            positiveCount = positiveCount,
-            negativeCount = negativeCount
-        )
+        return bench("SimpleVO.toEntity()") {
+            SimpleEntity(
+                id = id,
+                name = name,
+                type = type,
+                percent = percent,
+                positiveCount = positiveCount,
+                negativeCount = negativeCount
+            )
+        }
     }
 
     protected fun SimpleEntity.toVO(): SimpleVO {

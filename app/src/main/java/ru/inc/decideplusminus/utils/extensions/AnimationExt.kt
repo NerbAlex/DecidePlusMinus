@@ -68,11 +68,12 @@ internal fun View.motionDown(duration: Long = DEFAULT_MOTION_DURATION, onComplet
 
 internal fun Fragment.toolbarAnimationWithRecyclerView(
     recyclerView: RecyclerView,
-    decoration: RecyclerView.ItemDecoration = ToolbarDecoration()
 ) {
     recyclerView.addItemDecoration(ToolbarDecoration())
 
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        val decoration: RecyclerView.ItemDecoration = ToolbarDecoration()
+
         val toolbar = requireActivity().findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
         var isToolbarVisible = true
         var isMotionUpAnimationProcess = false

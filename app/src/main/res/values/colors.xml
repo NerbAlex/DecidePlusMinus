@@ -2,14 +2,14 @@
 <resources>
     <color name="purple_200">#FC869E</color>
     <color name="purple_500">#65BC67</color>
-    <color name="purple_700">#347732</color>
+    <color name="purple_700">#41933F</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
     <color name="success">#62AF55</color>
-    <color name="success_light">#48A86F</color>
+    <color name="success_light">#78C85B</color>
 
 <!--    <color name="error">#FC869E</color>-->
 <!--    <color name="error_light">#FFE3E8</color>-->
@@ -17,7 +17,7 @@
 <!--    <color name="red">#AE4F62</color>-->
 
 
-    <color name="error">#ADE3FB</color>
+    <color name="error">#B64646</color>
     <color name="error_light">#FF7474</color>
 <!--    #FF7979-->
     <color name="red">#54C6FA</color>
@@ -25,6 +25,8 @@
     <color name="neutral_light">#ADE3FB</color>
     <color name="neutral">#54C6FA</color>
     <color name="neutral_hard">#30A5FF</color>
+
+    <color name="transparent">#00000000</color>
 
 
 

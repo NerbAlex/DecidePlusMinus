@@ -8,13 +8,23 @@ class SimpleMainPageViewModel @Inject constructor(
     private val simpleMainPageInteractor: SimpleMainPageInteractor
 ) : BaseViewModel<SimpleMainPageViewState>() {
 
+    init {
+        val a = 10
+    }
+
     fun downloadData() {
-        bench("viewModel init") {
+        bench("viewModel downloadData success") {
             simpleMainPageInteractor.getData().subscribe({ listSimpleVo ->
-                bench("viewModel success") {
-                    mutableLiveData.postValue(SimpleMainPageViewState.Success(listSimpleVo))
-                }
+                mutableLiveData.postValue(SimpleMainPageViewState.Success(listSimpleVo))
             }, {}).addDisposable()
+        }
+    }
+
+    fun delete(id: Long) {
+        bench("viewModel delete success") {
+            simpleMainPageInteractor.delete(id).subscribe { ->
+                downloadData()
+            }.addDisposable()
         }
     }
 }

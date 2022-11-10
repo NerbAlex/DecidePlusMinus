@@ -18,6 +18,7 @@
         android:layout_gravity="center"
         android:layout_margin="8dp"
         android:ellipsize="end"
+        android:textColor="@color/white"
         android:fontFamily="@font/ubuntu_regular"
         android:maxLines="3"
         tools:text="Werty fdhgdfgu rygf привет по Русски" />

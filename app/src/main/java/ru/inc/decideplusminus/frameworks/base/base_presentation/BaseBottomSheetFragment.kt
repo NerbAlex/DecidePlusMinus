@@ -34,9 +34,11 @@ abstract class BaseBottomSheetFragment<Binding : ViewBinding, State>(private val
         return viewModel
     }
 
-    protected fun sendEvent(event: UiEvent) {
-        with(uiEvents) {
-            this@BaseBottomSheetFragment.requireContext().sendEvent(event)
+    protected fun sendEvent(vararg events: UiEvent) {
+        events.forEach { event ->
+            with(uiEvents) {
+                this@BaseBottomSheetFragment.requireContext().sendEvent(event)
+            }
         }
     }
 }

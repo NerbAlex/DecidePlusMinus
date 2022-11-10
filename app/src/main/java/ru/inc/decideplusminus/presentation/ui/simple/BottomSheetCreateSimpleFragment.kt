@@ -3,6 +3,7 @@ package ru.inc.decideplusminus.presentation.ui.simple
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import ru.inc.decideplusminus.R
 import ru.inc.decideplusminus.databinding.FragmentBottomSheetCreateSolutionBinding
 import ru.inc.decideplusminus.frameworks.base.base_presentation.BaseBottomSheetFragment
 import ru.inc.decideplusminus.presentation.ui.events.UiEvent
@@ -30,6 +31,8 @@ class BottomSheetCreateSimpleFragment :
             viewModel?.createSolution(name)
         }
     }
+
+    override fun getTheme(): Int = R.style.CustomBottomSheetDialog
 
     override fun renderState(state: CreateSimpleViewState) {
         when (state) {

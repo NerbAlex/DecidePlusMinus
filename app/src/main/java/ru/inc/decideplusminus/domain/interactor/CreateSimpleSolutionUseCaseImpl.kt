@@ -15,7 +15,7 @@ class CreateSimpleSolutionUseCaseImpl @Inject constructor(
             id = System.currentTimeMillis(),
             type = BaseSimpleItem.NEUTRAL,
             name = name,
-            percent = ""
+            percent = "Нет аргументов"
         )
         return repository.createSimpleSolution(newVO)
     }

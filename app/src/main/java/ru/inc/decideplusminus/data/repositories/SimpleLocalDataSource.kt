@@ -15,4 +15,6 @@ interface SimpleLocalDataSource {
     fun getDetailsById(parentId: Long): Single<Pair<List<SimpleDetailsVO>, List<SimpleDetailsVO>>>
     fun insertDetails(detailsVO: SimpleDetailsVO): Completable
     fun getSimple(id: Long): Single<SimpleVO>
+    fun delete(id: Long): Completable
+    fun deleteSimpleDetail(id: Long): Completable
 }
